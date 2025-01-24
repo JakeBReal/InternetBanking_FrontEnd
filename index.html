@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet_Banking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Internet Banking</h1>
+
+    <!-- Formulario de Registro -->
+    <section id="registro">
+      <h2>Registro</h2>
+      <form id="form-registro">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="cedula" placeholder="Cédula" required>
+        <input type="email" id="correo" placeholder="Correo" required>
+        <input type="password" id="contrasena" placeholder="Contraseña" required>
+        <button type="submit">Registrarse</button>
+      </form>      
+      <p id="registro-msg"></p>
+    </section>
+
+    <!-- Formulario de Inicio de Sesión -->
+    <section id="login">
+      <h2>Iniciar Sesión</h2>
+      <form id="form-login">
+        <input type="email" id="correo-login" placeholder="Correo" required>
+        <input type="password" id="contrasena-login" placeholder="Contraseña" required>
+        <button type="submit">Iniciar Sesión</button>
+      </form>
+      <p id="login-msg"></p>
+    </section>
+
+    <!-- Saldo del usuario -->
+    <section id="saldo" style="display: none;">
+      <h2>Saldo Disponible</h2>
+      <p>Hola, <span id="usuario-nombre"></span></p>
+      <p>Tu saldo actual es: <span id="usuario-saldo"></span></p>
+      <button id="logout">Cerrar Sesión</button>
+    </section>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
