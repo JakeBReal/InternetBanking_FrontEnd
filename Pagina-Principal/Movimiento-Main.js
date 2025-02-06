@@ -17,3 +17,5 @@ document.getElementById('administrarBeneficiarios').addEventListener('click', fu
 document.getElementById('cerrarSesion').addEventListener('click', function() {
   alert('Funcionalidad de Cerrar Sesión en desarrollo.');
 });
+
+

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JJ Internet Banking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .seccion-contenido {
+            display: none;
+        }
+        .seccion-contenido.activa {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex flex-col items-center justify-center p-6">
+        <h1 class="text-4xl font-bold text-blue-700 mb-6">Bienvenido a JJ Internet Banking</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <h2 class="text-xl font-semibold text-gray-800">Saldo y Movimientos</h2>
+                <p class="text-gray-600 mt-2">Consulta tu saldo y movimientos recientes.</p>
+                <button onclick="mostrarSeccion('saldo')" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-800">Ver Detalles</button>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <h2 class="text-xl font-semibold text-gray-800">Transferencias</h2>
+                <p class="text-gray-600 mt-2">Realiza transferencias a otros usuarios o beneficiarios.</p>
+                <button onclick="mostrarSeccion('transferencias')" class="mt-4 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-800">Transferir</button>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <h2 class="text-xl font-semibold text-gray-800">Tarjetas</h2>
+                <p class="text-gray-600 mt-2">Consulta el estado de tus tarjetas de crédito.</p>
+                <button onclick="mostrarSeccion('tarjetas')" class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-800">Ver Tarjetas</button>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <h2 class="text-xl font-semibold text-gray-800">Beneficiarios</h2>
+                <p class="text-gray-600 mt-2">Gestiona tus beneficiarios para transferencias rápidas.</p>
+                <button onclick="mostrarSeccion('beneficiarios')" class="mt-4 bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-800">Administrar</button>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <h2 class="text-xl font-semibold text-gray-800">Depósito</h2>
+                <p class="text-gray-600 mt-2">Deposita dinero en tu cuenta.</p>
+                <input type="number" id="cantidadDeposito" class="border border-gray-300 rounded px-3 py-2 mt-2 w-full" placeholder="Cantidad">
+                <button onclick="mostrarSeccion('deposito')" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">Depositar</button>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <h2 class="text-xl font-semibold text-gray-800">Cerrar Sesión</h2>
+                <p class="text-gray-600 mt-2">Salir de tu cuenta de forma segura.</p>
+                <button onclick="mostrarSeccion('cerrar_sesion')" class="mt-4 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-800">Cerrar Sesión</button>
+            </div>
+        </div>
+
+
+        <div id="saldo" class="seccion-contenido activa">
+            <h2>Saldo y Movimientos</h2>
+            <p>Aquí se mostrará la información del saldo y los movimientos.</p>
+        </div>
+
+        <div id="transferencias" class="seccion-contenido">
+            <h2>Transferencias</h2>
+            <p>Aquí se podrán realizar transferencias.</p>
+        </div>
+
+        <div id="tarjetas" class="seccion-contenido">
+            <h2>Tarjetas</h2>
+            <p>Aquí se mostrará la información de las tarjetas.</p>
+        </div>
+
+        <div id="beneficiarios" class="seccion-contenido">
+            <h2>Beneficiarios</h2>
+            <p>Aquí se gestionarán los beneficiarios.</p>
+        </div>
+
+        <div id="deposito" class="seccion-contenido">
+            <h2>Depósito</h2>
+            <p>Aquí se realizarán depósitos.</p>
+            <input type="number" id="cantidadDeposito" class="border border-gray-300 rounded px-3 py-2 mt-2 w-full" placeholder="Cantidad">
+            <button id="depositar" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">Depositar</button>
+        </div>
+
+        <div id="cerrar_sesion" class="seccion-contenido">
+            <h2>Cerrar Sesión</h2>
+            <p>Aquí se cerrará la sesión del usuario.</p>
+        </div>
+
+
+    </div>
+
+    <script>
+        function mostrarSeccion(idSeccion) {
+            const secciones = document.querySelectorAll('.seccion-contenido');
+            secciones.forEach(seccion => seccion.classList.remove('activa'));
+
+            const seccion = document.getElementById(idSeccion);
+            seccion.classList.add('activa');
+        }
+
+        // Lógica para el botón de depósito (si la necesitas aquí)
+        document.getElementById('depositar').addEventListener('click', function() {
+            const cantidad = parseFloat(document.getElementById('cantidadDeposito').value);
+
+            if (isNaN(cantidad) || cantidad <= 0) {
+                alert('Por favor, ingresa una cantidad válida para depositar.');
+                return;
+            }
+
+            // Aquí va la lógica real del depósito (llamada a la API, etc.)
+            alert(`Se han depositado ${cantidad} unidades (simulado).`);
+            document.getElementById('cantidadDeposito').value = '';
+        });
+
+    </script>
+
+</body>
+</html>
