@@ -40,7 +40,7 @@ form2.addEventListener("submit", async (e) => {
 
     response = await response.json();
     if(response.length){
-        window.location.href = "../Pagina-Principal/pagina_inicio.html";
+        window.location.href = "../Pagina-Principal/PaginaPrincipal.html";
 
     }else{
         alert("Usuario o contraseña incorrectos");

@@ -10,7 +10,7 @@ const client = new Client({
   host: 'localhost',
   user: 'postgres',
   password: 'admin',
-  database: 'restaurant_db'
+  database: 'Internet_Banking'
 });
 
 client.connect(err => {
