@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JJ Internet Banking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .seccion-contenido {
+            display: none;
+        }
+        .seccion-contenido.activa {
+            display: block;
+        }
+    </style>
+</head>
+
+<!-- Modal de saldo y movimientos-->
+<div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[500px] text-center">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Registrar Movimiento</h2>
+        
+        <!-- Formulario para insertar datos -->
+        <form id="formMovimiento">
+            <div class="mb-4 text-left">
+                <label for="tipoMovimiento" class="block text-gray-700 font-semibold">Tipo de Movimiento</label>
+                <select id="tipoMovimiento" class="w-full border border-gray-300 px-3 py-2 rounded">
+                    <option value="deposito">Depósito</option>
+                    <option value="retiro">Retiro</option>
+                </select>
+            </div>
+
+            <div class="mb-4 text-left">
+                <label for="monto" class="block text-gray-700 font-semibold">Monto</label>
+                <input type="number" id="monto" class="w-full border border-gray-300 px-3 py-2 rounded" placeholder="Ingrese el monto">
+            </div>
+
+            <div class="mb-4 text-left">
+                <label for="descripcion" class="block text-gray-700 font-semibold">Descripción</label>
+                <input type="text" id="descripcion" class="w-full border border-gray-300 px-3 py-2 rounded" placeholder="Ej: Pago de luz, Recarga, etc.">
+            </div>
+
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-800">
+                Hecho!!
+            </button>
+        </form>
+
+        <!-- este es el botón para cerrar -->
+        <button id="closeModal" class="mt-4 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-800">
+            Cerrar
+        </button>
+    </div>
+</div>
+<!------------------------------------------------------- aqui termina el modal de movimientos ---------------------------------------------->
+
+<!-- Modal de Transferencias -->
+<div id="modalTransferencias" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[500px] text-center">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Realizar Transferencia</h2>
+        
+        <!-- Formulario para insertar datos de la transferencia -->
+        <form id="formTransferencia">
+            <div class="mb-4 text-left">
+                <label for="cuentaDestino" class="block text-gray-700 font-semibold">Cuenta Destino</label>
+                <input type="text" id="cuentaDestino" class="w-full border border-gray-300 px-3 py-2 rounded" placeholder="Número de cuenta destino">
+            </div>
+
+            <div class="mb-4 text-left">
+                <label for="montoTransferencia" class="block text-gray-700 font-semibold">Monto</label>
+                <input type="number" id="montoTransferencia" class="w-full border border-gray-300 px-3 py-2 rounded" placeholder="Ingrese el monto">
+            </div>
+
+            <div class="mb-4 text-left">
+                <label for="concepto" class="block text-gray-700 font-semibold">Concepto</label>
+                <input type="text" id="concepto" class="w-full border border-gray-300 px-3 py-2 rounded" placeholder="Ej: Pago de renta, Transferencia familiar, etc.">
+            </div>
+
+            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-800">
+                Transferir
+            </button>
+        </form>
+
+        <!-- Botón para cerrar -->
+        <button id="closeModalTransferencias" class="mt-4 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-800">
+            Cerrar
+        </button>
+    </div>
+</div>
+
+<!-- Modal de Tarjetas -->
+<div id="modalTarjetas" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[500px] text-center">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Tarjetas</h2>
+        <p class="text-gray-600 mb-4">Consulta el estado de tus tarjetas de crédito.</p>
+        
+        <!-- Contenido del modal -->
+        <div class="mb-4 text-left">
+            <label for="numeroTarjeta" class="block text-gray-700 font-semibold">Número de Tarjeta</label>
+            <input type="text" id="numeroTarjeta" class="w-full border border-gray-300 px-3 py-2 rounded" placeholder="**** **** **** 1234">
+        </div>
+        
+        <div class="mb-4 text-left">
+            <label for="saldoTarjeta" class="block text-gray-700 font-semibold">Saldo Disponible</label>
+            <input type="text" id="saldoTarjeta" class="w-full border border-gray-300 px-3 py-2 rounded" placeholder="$0.00" readonly>
+        </div>
+        
+        <button type="button" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-800" id="consultarTarjetas">
+            Consultar
+        </button>
+        
+        <!-- Botón para cerrar -->
+        <button id="closeModalTarjetas" class="mt-4 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-800">
+            Cerrar
+        </button>
+    </div>
+</div>
+
+<!-- Modal de Beneficiarios -->
+<div id="modalBeneficiarios" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[500px] text-center">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Administrar Beneficiarios</h2>
+        <p class="text-gray-600 mb-4">Aquí puedes agregar, eliminar o editar beneficiarios.</p>
+        
+        <!-- Contenido del modal -->
+        <div class="mb-4 text-left">
+            <label for="nombreBeneficiario" class="block text-gray-700 font-semibold">Nombre del Beneficiario</label>
+            <input type="text" id="nombreBeneficiario" class="w-full border border-gray-300 px-3 py-2 rounded" placeholder="Ej: Juan Pérez">
+        </div>
+
+        <div class="mb-4 text-left">
+            <label for="cuentaBeneficiario" class="block text-gray-700 font-semibold">Cuenta</label>
+            <input type="text" id="cuentaBeneficiario" class="w-full border border-gray-300 px-3 py-2 rounded" placeholder="Número de cuenta">
+        </div>
+
+        <button type="button" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-800">
+            Agregar Beneficiario
+        </button>
+
+        <!-- Botón para cerrar -->
+        <button id="closeModalBeneficiarios" class="mt-4 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-800">
+            Cerrar
+        </button>
+    </div>
+</div>
+
+<div id="modalDeposito" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h2 class="text-xl font-semibold mb-4">Realizar Depósito</h2>
+
+        <!-- Campo: Número de Cuenta -->
+        <label class="block mb-2">Número de Cuenta:</label>
+        <input type="text" id="numeroCuenta" class="w-full border border-gray-300 px-3 py-2 rounded-md mb-3" placeholder="Ingrese el número de cuenta">
+
+        <!-- Campo: Monto -->
+        <label class="block mb-2">Monto:</label>
+        <input type="number" id="cantidadDepositoModal" class="w-full border border-gray-300 px-3 py-2 rounded-md mb-3" placeholder="Ingrese el monto">
+
+        <!-- Botones -->
+        <div class="flex justify-end gap-3">
+            <button id="cerrarModalDeposito" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700">Cancelar</button>
+            <button id="confirmarDeposito" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-700">Confirmar</button>
+        </div>
+    </div>
+</div>
+
+
+
+<body class="bg-gray-100">
+    <div class="min-h-screen flex flex-col items-center justify-center p-6">
+        <h1 class="text-4xl font-bold text-blue-700 mb-6">Bienvenido a JJ Internet Banking</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <h2 class="text-xl font-semibold text-gray-800">Saldo y Movimientos</h2>
+                <p class="text-gray-600 mt-2">Consulta tu saldo y movimientos recientes.</p>
+                <button id="openModal" class="mt-4 bg-pink-600 text-white px-4 py-2 rounded-md hover:bg-blue-800">
+                    Ver Detalles
+                </button>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <h2 class="text-xl font-semibold text-gray-800">Transferencias</h2>
+                <p class="text-gray-600 mt-2">Realiza transferencias a otros usuarios o beneficiarios.</p>
+                <button id="openModalTransferencias" class="mt-4 bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-green-800">
+                    Transferir
+                </button>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <h2 class="text-xl font-semibold text-gray-800">Tarjetas</h2>
+                <p class="text-gray-600 mt-2">Consulta el estado de tus tarjetas de crédito.</p>
+                <button id="openModalTarjetas" class="mt-4 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-800">
+                    Ver Tarjeta
+                </button>
+                
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <h2 class="text-xl font-semibold text-gray-800">Beneficiarios</h2>
+                <p class="text-gray-600 mt-2">Gestiona tus beneficiarios para transferencias rápidas.</p>
+                <button id="openModalBeneficiarios" class="mt-4 bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-800">
+                    Administrar
+                </button>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <h2 class="text-xl font-semibold text-gray-800">Depósito</h2>
+                <p class="text-gray-600 mt-2">Deposita dinero en tu cuenta.</p>
+                <button id="abrirModalDeposito" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">Depositar</button>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <h2 class="text-xl font-semibold text-gray-800">Cerrar Sesión</h2>
+                <p class="text-gray-600 mt-2">Salir de tu cuenta de forma segura.</p>
+                <button onclick="mostrarSeccion('cerrar_sesion')" class="mt-4 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-800">Cerrar Sesión</button>
+            </div>
+        </div>
+
+
+        <div id="tarjetas" class="seccion-contenido">
+            <h2>Tarjetas</h2>
+            <p>Aquí se mostrará la información de las tarjetas.</p>
+        </div>
+
+        <div id="beneficiarios" class="seccion-contenido">
+            <h2>Beneficiarios</h2>
+            <p>Aquí se gestionarán los beneficiarios.</p>
+        </div>
+
+        <div id="deposito" class="seccion-contenido">
+            <h2>Depósito</h2>
+            <p>Aquí se realizarán depósitos.</p>
+            
+        </div>
+
+        <div id="cerrar_sesion" class="seccion-contenido">
+            <h2>Cerrar Sesión</h2>
+            <p>Aquí se cerrará la sesión del usuario.</p>
+        </div>
+
+
+    </div>
+
+    <script>
+        function mostrarSeccion(idSeccion) {
+            const secciones = document.querySelectorAll('.seccion-contenido');
+            secciones.forEach(seccion => seccion.classList.remove('activa'));
+
+            const seccion = document.getElementById(idSeccion);
+            seccion.classList.add('activa');
+        }
+
+        // Lógica para el botón de depósito (si la necesitas aquí)
+        document.getElementById('depositar').addEventListener('click', function() {
+            const cantidad = parseFloat(document.getElementById('cantidadDeposito').value);
+
+            if (isNaN(cantidad) || cantidad <= 0) {
+                alert('Por favor, ingresa una cantidad válida para depositar.');
+                return;
+            }
+
+            // Aquí va la lógica real del depósito (llamada a la API, etc.)
+            alert(`Se han depositado ${cantidad} unidades (simulado).`);
+            document.getElementById('cantidadDeposito').value = '';
+        });
+
+    </script>
+
+<script>
+    document.getElementById("openModal").addEventListener("click", function () {
+        document.getElementById("modal").classList.remove("hidden");
+    });
+    document.getElementById("closeModal").addEventListener("click", function () {
+        document.getElementById("modal").classList.add("hidden");
+    });
+</script>
+
+<script>
+    // Abrir el modal
+    document.getElementById("openModalTransferencias").addEventListener("click", function () {
+        document.getElementById("modalTransferencias").classList.remove("hidden");
+    });
+
+    // Cerrar el modal
+    document.getElementById("closeModalTransferencias").addEventListener("click", function () {
+        document.getElementById("modalTransferencias").classList.add("hidden");
+    });
+
+    // Manejo del formulario (opcional, puedes modificarlo para enviar los datos a un servidor)
+    document.getElementById("formTransferencia").addEventListener("submit", function (event) {
+        event.preventDefault();
+        alert("Transferencia realizada con éxito");
+        document.getElementById("modalTransferencias").classList.add("hidden");
+    });
+</script>
+
+<script>
+    // Abrir el modal
+    document.getElementById("openModalTarjetas").addEventListener("click", function () {
+        document.getElementById("modalTarjetas").classList.remove("hidden");
+    });
+
+    // Cerrar el modal
+    document.getElementById("closeModalTarjetas").addEventListener("click", function () {
+        document.getElementById("modalTarjetas").classList.add("hidden");
+    });
+
+    // Simulación de consulta de tarjetas
+    document.getElementById("consultarTarjetas").addEventListener("click", function () {
+        document.getElementById("saldoTarjeta").value = "$1,500.00"; // Simulación de saldo
+    });
+</script>
+
+<script>
+    document.getElementById("openModalBeneficiarios").addEventListener("click", function () {
+        document.getElementById("modalBeneficiarios").classList.remove("hidden");
+    });
+
+    document.getElementById("closeModalBeneficiarios").addEventListener("click", function () {
+        document.getElementById("modalBeneficiarios").classList.add("hidden");
+    });
+</script>
+
+<script>
+    // Obtener elementos del DOM
+    const modalDeposito = document.getElementById('modalDeposito');
+    const btnAbrirModal = document.getElementById('abrirModalDeposito');
+    const btnCerrarModal = document.getElementById('cerrarModalDeposito');
+    const btnConfirmarDeposito = document.getElementById('confirmarDeposito');
+    const inputCantidad = document.getElementById('cantidadDepositoModal');
+
+    // Mostrar el modal al hacer clic en "Depositar"
+    btnAbrirModal.addEventListener('click', () => {
+        modalDeposito.classList.remove('hidden');
+    });
+
+    // Ocultar el modal al hacer clic en "Cancelar"
+    btnCerrarModal.addEventListener('click', () => {
+        modalDeposito.classList.add('hidden');
+    });
+
+    // Confirmar depósito
+    btnConfirmarDeposito.addEventListener('click', () => {
+        const cantidad = parseFloat(inputCantidad.value);
+
+        if (isNaN(cantidad) || cantidad <= 0) {
+            alert('Por favor, ingresa una cantidad válida para depositar.');
+            return;
+        }
+
+        // Simulación del depósito (aquí podrías hacer una llamada a la API)
+        alert(`Se han depositado ${cantidad} unidades.`);
+        
+        // Limpiar el input y cerrar el modal
+        inputCantidad.value = '';
+        modalDeposito.classList.add('hidden');
+    });
+</script>
+
+
+</body>
+</html>
