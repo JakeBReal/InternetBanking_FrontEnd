@@ -14,8 +14,10 @@
             <li><a href="#" id="transacciones-btn">Transferencias</a></li>
             <li><a href="#" id="tarjetas-btn">Tarjetas</a></li>
             <li><a href="#" id="impuestos-btn">Impuestos y Servicios</a></li>
-            <li><a href="#">Estado de Cuenta</a></li>
-            <li><a href="#">Configuración</a></li>
+            <!-- Se cambió "Estado de Cuenta" por "Cheques" -->
+            <li><a href="#" id="cheques-btn">Cheques</a></li>
+            <!-- Se reemplaza "Configuración" por "Serrucho" -->
+            <li><a href="#" id="serrucho-btn">Serrucho</a></li>
             <li><a href="#">Perfil</a></li>
             <li class="logout"><a href="#">Cerrar sesión</a></li>
         </ul>
@@ -124,6 +126,46 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <!-- Sección de Cheques -->
+        <div id="cheques" class="content-section">
+            <h2>Emisión de Cheques</h2>
+            <form id="form-cheques">
+                <label for="cuenta-origen">Cuenta Origen:</label>
+                <input type="text" id="cuenta-origen" name="cuenta-origen" required>
+
+                <label for="numero-cheque">Número de Cheque:</label>
+                <input type="text" id="numero-cheque" name="numero-cheque" required>
+
+                <label for="monto-cheque">Monto:</label>
+                <input type="number" id="monto-cheque" name="monto-cheque" required>
+
+                <label for="concepto-cheque">Concepto:</label>
+                <input type="text" id="concepto-cheque" name="concepto-cheque" required>
+
+                <button type="submit">Emitir Cheque</button>
+            </form>
+        </div>
+
+        <!-- Nueva sección para Serrucho -->
+        <div id="serrucho" class="content-section">
+            <h2>Mantenimiento de Serrucho</h2>
+            <form id="form-serrucho">
+                <label for="tipo-serrucho">Tipo de Serrucho:</label>
+                <input type="text" id="tipo-serrucho" name="tipo-serrucho" required>
+
+                <label for="marca-serrucho">Marca:</label>
+                <input type="text" id="marca-serrucho" name="marca-serrucho" required>
+
+                <label for="cantidad-serrucho">Cantidad:</label>
+                <input type="number" id="cantidad-serrucho" name="cantidad-serrucho" required>
+
+                <label for="descripcion-serrucho">Descripción:</label>
+                <input type="text" id="descripcion-serrucho" name="descripcion-serrucho" required>
+
+                <button type="submit">Guardar Serrucho</button>
+            </form>
         </div>
     </div>
 

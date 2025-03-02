@@ -3,13 +3,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const inicio = document.getElementById("inicio");
     const transferencias = document.getElementById("transacciones");
     const tarjetas = document.getElementById("tarjetas");
-    const impuestos = document.getElementById("impuestos"); // Asegurar que exista este ID en el HTML
+    const impuestos = document.getElementById("impuestos");
+    const cheques = document.getElementById("cheques");
+    const serrucho = document.getElementById("serrucho"); // Nueva sección para Serrucho
 
     // Ocultar todas las secciones por defecto excepto bienvenida
     inicio.style.display = "none";
     transferencias.style.display = "none";
     tarjetas.style.display = "none";
     impuestos.style.display = "none"; 
+    cheques.style.display = "none";
+    serrucho.style.display = "none";
 
     function ocultarSecciones() {
         bienvenida.style.display = "none";
@@ -17,6 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
         transferencias.style.display = "none";
         tarjetas.style.display = "none";
         impuestos.style.display = "none";
+        cheques.style.display = "none";
+        serrucho.style.display = "none";
     }
 
     document.getElementById("inicio-btn").addEventListener("click", () => {
@@ -37,6 +43,17 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("impuestos-btn").addEventListener("click", () => {
         ocultarSecciones();
         impuestos.style.display = "block";
+    });
+    
+    document.getElementById("cheques-btn").addEventListener("click", () => {
+        ocultarSecciones();
+        cheques.style.display = "block";
+    });
+
+    // Evento para el botón Serrucho
+    document.getElementById("serrucho-btn").addEventListener("click", () => {
+        ocultarSecciones();
+        serrucho.style.display = "block";
     });
 
     // Manejo del formulario de transferencias
@@ -87,5 +104,102 @@ document.addEventListener("DOMContentLoaded", function () {
 
         formTransferencias.reset();
     });
-});
 
+    // Manejo del formulario de cheques, similar al de transferencias
+    const formCheques = document.getElementById("form-cheques");
+
+    formCheques.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const cuentaOrigen = document.getElementById("cuenta-origen").value;
+        const numeroCheque = document.getElementById("numero-cheque").value;
+        const montoCheque = document.getElementById("monto-cheque").value;
+        const conceptoCheque = document.getElementById("concepto-cheque").value;
+
+        const fecha = new Date().toLocaleDateString();
+
+        // Asegurar que exista la tabla de cheques antes de agregar una fila
+        let chequesList = document.getElementById("cheques-list");
+        if (!chequesList) {
+            chequesList = document.createElement("tbody");
+            chequesList.id = "cheques-list";
+
+            const table = document.createElement("table");
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Cuenta Origen</th>
+                        <th>Número de Cheque</th>
+                        <th>Monto</th>
+                        <th>Concepto</th>
+                    </tr>
+                </thead>
+            `;
+            table.appendChild(chequesList);
+            cheques.appendChild(table);
+        }
+
+        const newCheque = document.createElement("tr");
+        newCheque.innerHTML = `
+            <td>${fecha}</td>
+            <td>${cuentaOrigen}</td>
+            <td>${numeroCheque}</td>
+            <td>${montoCheque}</td>
+            <td>${conceptoCheque}</td>
+        `;
+
+        chequesList.appendChild(newCheque);
+
+        formCheques.reset();
+    });
+
+    // Manejo del formulario de serrucho, adaptado al mantenimiento
+    const formSerrucho = document.getElementById("form-serrucho");
+
+    formSerrucho.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const tipoSerrucho = document.getElementById("tipo-serrucho").value;
+        const marcaSerrucho = document.getElementById("marca-serrucho").value;
+        const cantidadSerrucho = document.getElementById("cantidad-serrucho").value;
+        const descripcionSerrucho = document.getElementById("descripcion-serrucho").value;
+
+        const fecha = new Date().toLocaleDateString();
+
+        // Asegurar que exista la tabla de serrucho antes de agregar una fila
+        let serruchoList = document.getElementById("serrucho-list");
+        if (!serruchoList) {
+            serruchoList = document.createElement("tbody");
+            serruchoList.id = "serrucho-list";
+
+            const table = document.createElement("table");
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Tipo de Serrucho</th>
+                        <th>Marca</th>
+                        <th>Cantidad</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+            `;
+            table.appendChild(serruchoList);
+            serrucho.appendChild(table);
+        }
+
+        const newSerrucho = document.createElement("tr");
+        newSerrucho.innerHTML = `
+            <td>${fecha}</td>
+            <td>${tipoSerrucho}</td>
+            <td>${marcaSerrucho}</td>
+            <td>${cantidadSerrucho}</td>
+            <td>${descripcionSerrucho}</td>
+        `;
+
+        serruchoList.appendChild(newSerrucho);
+
+        formSerrucho.reset();
+    });
+});
