@@ -8,26 +8,30 @@
 </head>
 <body>
     <div class="sidebar">
-        <img src="logo.png" alt="Logo">
+        <img src="bank-logo-or-icon-design-on-white-background-illustration-vector-removebg-preview.png" 
+             alt="Logo" 
+             style="width: 120px; height: auto;">
         <ul>
             <li><a href="#" id="inicio-btn">Estado</a></li>
             <li><a href="#" id="transacciones-btn">Transferencias</a></li>
             <li><a href="#" id="tarjetas-btn">Tarjetas</a></li>
             <li><a href="#" id="impuestos-btn">Impuestos y Servicios</a></li>
-            <!-- Se cambió "Estado de Cuenta" por "Cheques" -->
             <li><a href="#" id="cheques-btn">Cheques</a></li>
-            <!-- Se reemplaza "Configuración" por "Serrucho" -->
             <li><a href="#" id="serrucho-btn">Serrucho</a></li>
+            <!-- Nuevo enlace para Depósito -->
+            <li><a href="#" id="deposito-btn">Depósito</a></li>
             <li><a href="#">Perfil</a></li>
             <li class="logout"><a href="#">Cerrar sesión</a></li>
         </ul>
     </div>
 
     <div class="main-content">
+        <!-- Sección de bienvenida -->
         <div id="bienvenida" class="content-section">
             <h1>Bienvenido, Usuario</h1>
         </div>
 
+        <!-- Sección de Estado -->
         <div id="inicio" class="content-section">
             <div class="account-balance">
                 <div class="account-box">
@@ -41,6 +45,7 @@
             </div>
         </div>
 
+        <!-- Sección de Transferencias -->
         <div id="transacciones" class="content-section">
             <h2>Transferencias</h2>
             <form id="form-transacciones">
@@ -60,6 +65,7 @@
             </form>
         </div>
 
+        <!-- Sección de Tarjetas -->
         <div id="tarjetas" class="content-section">
             <h2>Tarjetas</h2>
             <div class="tarjetas">
@@ -86,6 +92,7 @@
             </div>
         </div>
 
+        <!-- Sección de Impuestos -->
         <div id="impuestos" class="content-section">
             <h2>Pago de Impuestos y Servicios</h2>
             <form id="form-impuestos">
@@ -148,7 +155,7 @@
             </form>
         </div>
 
-        <!-- Nueva sección para Serrucho -->
+        <!-- Sección de Serrucho -->
         <div id="serrucho" class="content-section">
             <h2>Mantenimiento de Serrucho</h2>
             <form id="form-serrucho">
@@ -166,6 +173,45 @@
 
                 <button type="submit">Guardar Serrucho</button>
             </form>
+        </div>
+
+        <!-- ============================= -->
+        <!-- NUEVA SECCIÓN PARA DEPÓSITO -->
+        <!-- ============================= -->
+        <div id="deposito" class="content-section">
+            <h2>Depósito</h2>
+            <form id="form-deposito">
+                <label for="cuenta-deposito">Cuenta de Depósito:</label>
+                <input type="text" id="cuenta-deposito" name="cuenta-deposito" required>
+
+                <label for="monto-deposito">Monto:</label>
+                <input type="number" id="monto-deposito" name="monto-deposito" required>
+
+                <label for="referencia-deposito">Referencia:</label>
+                <input type="text" id="referencia-deposito" name="referencia-deposito" required>
+
+                <label for="concepto-deposito">Concepto:</label>
+                <input type="text" id="concepto-deposito" name="concepto-deposito" required>
+
+                <button type="submit">Realizar Depósito</button>
+            </form>
+
+            <div class="transactions">
+                <h3>Historial de Depósitos</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Cuenta</th>
+                            <th>Monto</th>
+                            <th>Referencia</th>
+                            <th>Concepto</th>
+                        </tr>
+                    </thead>
+                    <tbody id="deposito-list">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

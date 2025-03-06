@@ -203,3 +203,104 @@ document.addEventListener("DOMContentLoaded", function () {
         formSerrucho.reset();
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const bienvenida = document.getElementById("bienvenida");
+    const inicio = document.getElementById("inicio");
+    const transferencias = document.getElementById("transacciones");
+    const tarjetas = document.getElementById("tarjetas");
+    const impuestos = document.getElementById("impuestos");
+    const cheques = document.getElementById("cheques");
+    const serrucho = document.getElementById("serrucho");
+    const deposito = document.getElementById("deposito"); // Nueva sección
+
+    // Ocultar todas las secciones
+    function ocultarSecciones() {
+        bienvenida.style.display = "none";
+        inicio.style.display = "none";
+        transferencias.style.display = "none";
+        tarjetas.style.display = "none";
+        impuestos.style.display = "none";
+        cheques.style.display = "none";
+        serrucho.style.display = "none";
+        deposito.style.display = "none";
+    }
+
+    // Listeners para cada botón de la barra lateral
+    document.getElementById("inicio-btn").addEventListener("click", () => {
+        ocultarSecciones();
+        inicio.style.display = "block";
+    });
+
+    document.getElementById("transacciones-btn").addEventListener("click", () => {
+        ocultarSecciones();
+        transferencias.style.display = "block";
+    });
+
+    document.getElementById("tarjetas-btn").addEventListener("click", () => {
+        ocultarSecciones();
+        tarjetas.style.display = "block";
+    });
+
+    document.getElementById("impuestos-btn").addEventListener("click", () => {
+        ocultarSecciones();
+        impuestos.style.display = "block";
+    });
+
+    document.getElementById("cheques-btn").addEventListener("click", () => {
+        ocultarSecciones();
+        cheques.style.display = "block";
+    });
+
+    document.getElementById("serrucho-btn").addEventListener("click", () => {
+        ocultarSecciones();
+        serrucho.style.display = "block";
+    });
+
+    // Nuevo listener para Depósito
+    document.getElementById("deposito-btn").addEventListener("click", () => {
+        ocultarSecciones();
+        deposito.style.display = "block";
+    });
+
+    // Manejo del formulario de transferencias (ejemplo existente)
+    const formTransferencias = document.getElementById("form-transacciones");
+    formTransferencias.addEventListener("submit", function (e) {
+        e.preventDefault();
+        // Lógica de transferencias...
+    });
+
+    // Manejo del formulario de depósito
+    const formDeposito = document.getElementById("form-deposito");
+    formDeposito.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Obtenemos los valores del formulario
+        const cuentaDeposito = document.getElementById("cuenta-deposito").value;
+        const montoDeposito = document.getElementById("monto-deposito").value;
+        const referenciaDeposito = document.getElementById("referencia-deposito").value;
+        const conceptoDeposito = document.getElementById("concepto-deposito").value;
+
+        // Generamos la fecha actual
+        const fecha = new Date().toLocaleDateString();
+
+        // Aseguramos que exista la tabla antes de agregar una fila
+        let depositoList = document.getElementById("deposito-list");
+        // Creamos la fila
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+            <td>${fecha}</td>
+            <td>${cuentaDeposito}</td>
+            <td>${montoDeposito}</td>
+            <td>${referenciaDeposito}</td>
+            <td>${conceptoDeposito}</td>
+        `;
+
+        // Agregamos la fila al tbody
+        depositoList.appendChild(newRow);
+
+        // Reseteamos el formulario
+        formDeposito.reset();
+    });
+});
+
