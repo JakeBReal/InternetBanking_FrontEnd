@@ -1,220 +1,281 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú de Banco</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú de Banco</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="sidebar">
-        <img src="bank-logo-or-icon-design-on-white-background-illustration-vector-removebg-preview.png" 
-             alt="Logo" 
-             style="width: 120px; height: auto;">
-        <ul>
-            <li><a href="#" id="inicio-btn">Estado</a></li>
-            <li><a href="#" id="transacciones-btn">Transferencias</a></li>
-            <li><a href="#" id="tarjetas-btn">Tarjetas</a></li>
-            <li><a href="#" id="impuestos-btn">Impuestos y Servicios</a></li>
-            <li><a href="#" id="cheques-btn">Cheques</a></li>
-            <li><a href="#" id="serrucho-btn">Serrucho</a></li>
-            <!-- Nuevo enlace para Depósito -->
-            <li><a href="#" id="deposito-btn">Depósito</a></li>
-            <li><a href="#">Perfil</a></li>
-            <li class="logout"><a href="#">Cerrar sesión</a></li>
-        </ul>
+  <div class="sidebar">
+    <img src="bank-logo-or-icon-design-on-white-background-illustration-vector-removebg-preview.png" 
+         alt="Logo" 
+         style="width: 120px; height: auto;">
+    <ul>
+      <li><a href="#" id="inicio-btn">Estado</a></li>
+      <li><a href="#" id="transacciones-btn">Transferencias</a></li>
+      <li><a href="#" id="tarjetas-btn">Tarjetas</a></li>
+      <li><a href="#" id="impuestos-btn">Impuestos y Servicios</a></li>
+      <li><a href="#" id="cheques-btn">Cheques</a></li>
+      <li><a href="#" id="serrucho-btn">Serrucho</a></li>
+      <!-- Nuevo enlace para Depósito -->
+      <li><a href="#" id="deposito-btn">Depósito</a></li>
+      <!-- Nuevo enlace para Beneficiario -->
+      <li><a href="#" id="beneficiario-btn">Beneficiario</a></li>
+      <li><a href="#">Perfil</a></li>
+      <li class="logout"><a href="#" id="logout-btn">Cerrar sesión</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <!-- Sección de bienvenida (única visible al inicio) -->
+    <div id="bienvenida" class="content-section">
+      <h1>Bienvenido, Usuario</h1>
     </div>
 
-    <div class="main-content">
-        <!-- Sección de bienvenida -->
-        <div id="bienvenida" class="content-section">
-            <h1>Bienvenido, Usuario</h1>
+    <!-- Sección de Estado -->
+    <div id="inicio" class="content-section">
+      <div class="account-balance">
+        <div class="account-box">
+          <h3>Cuenta Corriente</h3>
+          <p class="balance">$0.00</p>
         </div>
-
-        <!-- Sección de Estado -->
-        <div id="inicio" class="content-section">
-            <div class="account-balance">
-                <div class="account-box">
-                    <h3>Cuenta Corriente</h3>
-                    <p class="balance">$0.00</p>
-                </div>
-                <div class="account-box">
-                    <h3>Cuenta de Ahorro</h3>
-                    <p class="balance">$0.00</p>
-                </div>
-            </div>
+        <div class="account-box">
+          <h3>Cuenta de Ahorro</h3>
+          <p class="balance">$0.00</p>
         </div>
-
-        <!-- Sección de Transferencias -->
-        <div id="transacciones" class="content-section">
-            <h2>Transferencias</h2>
-            <form id="form-transacciones">
-                <label for="origen">Origen:</label>
-                <input type="text" id="origen" name="origen" required>
-
-                <label for="destino">Cuenta de Destino:</label>
-                <input type="text" id="destino" name="destino" required>
-
-                <label for="monto">Monto:</label>
-                <input type="number" id="monto" name="monto" required>
-
-                <label for="concepto">Concepto:</label>
-                <input type="text" id="concepto" name="concepto" required>
-
-                <button type="submit">Realizar Transacción</button>
-            </form>
-        </div>
-
-        <!-- Sección de Tarjetas -->
-        <div id="tarjetas" class="content-section">
-            <h2>Tarjetas</h2>
-            <div class="tarjetas">
-                <div class="tarjeta">
-                    <div class="detalles">
-                        <span class="tipo">Débito</span>
-                        <span class="banco">VISA</span>
-                        <p>Juan Pérez</p>
-                        <p>**** 1234</p>
-                    </div>
-                </div>
-                <div class="tarjeta">
-                    <div class="detalles">
-                        <span class="tipo">Crédito</span>
-                        <span class="banco">VISA</span>
-                        <p>Juan Pérez</p>
-                        <p>**** 5678</p>
-                    </div>
-                </div>
-                <div class="tarjeta agregar">
-                    <span>+</span>
-                    <p>Añadir nueva tarjeta</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sección de Impuestos -->
-        <div id="impuestos" class="content-section">
-            <h2>Pago de Impuestos y Servicios</h2>
-            <form id="form-impuestos">
-                <label for="tipo-impuesto">Tipo de Impuesto:</label>
-                <select id="tipo-impuesto" name="tipo-impuesto" required>
-                    <option value="agua">Agua</option>
-                    <option value="electricidad">Electricidad</option>
-                    <option value="telefono">Teléfono</option>
-                    <option value="internet">Internet</option>
-                    <option value="otro">Otro</option>
-                </select>
-
-                <label for="numero-referencia">Número de Referencia:</label>
-                <input type="text" id="numero-referencia" name="numero-referencia" required>
-
-                <label for="monto-impuesto">Monto a Pagar:</label>
-                <input type="number" id="monto-impuesto" name="monto-impuesto" required>
-
-                <label for="cuenta-pago">Cuenta de Pago:</label>
-                <input type="text" id="cuenta-pago" name="cuenta-pago" required>
-
-                <button type="submit">Pagar Impuesto</button>
-            </form>
-
-            <div class="transactions">
-                <h3>Historial de Pagos</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tipo</th>
-                            <th>Referencia</th>
-                            <th>Monto</th>
-                            <th>Cuenta</th>
-                            <th>Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody id="impuestos-list">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Sección de Cheques -->
-        <div id="cheques" class="content-section">
-            <h2>Emisión de Cheques</h2>
-            <form id="form-cheques">
-                <label for="cuenta-origen">Cuenta Origen:</label>
-                <input type="text" id="cuenta-origen" name="cuenta-origen" required>
-
-                <label for="numero-cheque">Número de Cheque:</label>
-                <input type="text" id="numero-cheque" name="numero-cheque" required>
-
-                <label for="monto-cheque">Monto:</label>
-                <input type="number" id="monto-cheque" name="monto-cheque" required>
-
-                <label for="concepto-cheque">Concepto:</label>
-                <input type="text" id="concepto-cheque" name="concepto-cheque" required>
-
-                <button type="submit">Emitir Cheque</button>
-            </form>
-        </div>
-
-        <!-- Sección de Serrucho -->
-        <div id="serrucho" class="content-section">
-            <h2>Mantenimiento de Serrucho</h2>
-            <form id="form-serrucho">
-                <label for="tipo-serrucho">Tipo de Serrucho:</label>
-                <input type="text" id="tipo-serrucho" name="tipo-serrucho" required>
-
-                <label for="marca-serrucho">Marca:</label>
-                <input type="text" id="marca-serrucho" name="marca-serrucho" required>
-
-                <label for="cantidad-serrucho">Cantidad:</label>
-                <input type="number" id="cantidad-serrucho" name="cantidad-serrucho" required>
-
-                <label for="descripcion-serrucho">Descripción:</label>
-                <input type="text" id="descripcion-serrucho" name="descripcion-serrucho" required>
-
-                <button type="submit">Guardar Serrucho</button>
-            </form>
-        </div>
-
-        <!-- ============================= -->
-        <!-- NUEVA SECCIÓN PARA DEPÓSITO -->
-        <!-- ============================= -->
-        <div id="deposito" class="content-section">
-            <h2>Depósito</h2>
-            <form id="form-deposito">
-                <label for="cuenta-deposito">Cuenta de Depósito:</label>
-                <input type="text" id="cuenta-deposito" name="cuenta-deposito" required>
-
-                <label for="monto-deposito">Monto:</label>
-                <input type="number" id="monto-deposito" name="monto-deposito" required>
-
-                <label for="referencia-deposito">Referencia:</label>
-                <input type="text" id="referencia-deposito" name="referencia-deposito" required>
-
-                <label for="concepto-deposito">Concepto:</label>
-                <input type="text" id="concepto-deposito" name="concepto-deposito" required>
-
-                <button type="submit">Realizar Depósito</button>
-            </form>
-
-            <div class="transactions">
-                <h3>Historial de Depósitos</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Cuenta</th>
-                            <th>Monto</th>
-                            <th>Referencia</th>
-                            <th>Concepto</th>
-                        </tr>
-                    </thead>
-                    <tbody id="deposito-list">
-                    </tbody>
-                </table>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <script src="menuacs.js"></script>
+    <!-- Sección de Transferencias -->
+    <div id="transacciones" class="content-section">
+      <h2>Transferencias</h2>
+      <form id="form-transacciones">
+        <label for="origen">Origen:</label>
+        <input type="text" id="origen" name="origen" required>
+
+        <label for="destino">Cuenta de Destino:</label>
+        <input type="text" id="destino" name="destino" required>
+
+        <label for="monto">Monto:</label>
+        <input type="number" id="monto" name="monto" required>
+
+        <label for="concepto">Concepto:</label>
+        <input type="text" id="concepto" name="concepto" required>
+
+        <button type="submit">Realizar Transacción</button>
+      </form>
+    </div>
+
+    <!-- Sección de Tarjetas -->
+    <div id="tarjetas" class="content-section">
+      <h2>Tarjetas</h2>
+      <div class="tarjetas">
+        <div class="tarjeta">
+          <div class="detalles">
+            <span class="tipo">Débito</span>
+            <span class="banco">VISA</span>
+            <p>Juan Pérez</p>
+            <p>**** 1234</p>
+          </div>
+        </div>
+        <div class="tarjeta">
+          <div class="detalles">
+            <span class="tipo">Crédito</span>
+            <span class="banco">VISA</span>
+            <p>Juan Pérez</p>
+            <p>**** 5678</p>
+          </div>
+        </div>
+        <div class="tarjeta agregar">
+          <span>+</span>
+          <p>Añadir nueva tarjeta</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección de Mantenimiento de Tarjeta -->
+    <div id="mantenimiento-tarjeta" class="content-section">
+      <h2>Agregar Nueva Tarjeta</h2>
+      <form id="form-tarjeta">
+        <label for="tipo-tarjeta">Tipo de Tarjeta:</label>
+        <select id="tipo-tarjeta" name="tipo-tarjeta" required>
+          <option value="débito">Débito</option>
+          <option value="crédito">Crédito</option>
+        </select>
+
+        <label for="banco-tarjeta">Banco:</label>
+        <input type="text" id="banco-tarjeta" name="banco-tarjeta" required>
+
+        <label for="nombre-tarjeta">Nombre del Titular:</label>
+        <input type="text" id="nombre-tarjeta" name="nombre-tarjeta" required>
+
+        <label for="numero-tarjeta">Número de Tarjeta:</label>
+        <input type="text" id="numero-tarjeta" name="numero-tarjeta" required>
+
+        <button type="submit">Guardar Tarjeta</button>
+      </form>
+      <button id="cancelar-tarjeta">Cancelar</button>
+    </div>
+
+    <!-- Sección de Impuestos -->
+    <div id="impuestos" class="content-section">
+      <h2>Pago de Impuestos y Servicios</h2>
+      <form id="form-impuestos">
+        <label for="tipo-impuesto">Tipo de Impuesto:</label>
+        <select id="tipo-impuesto" name="tipo-impuesto" required>
+          <option value="agua">Agua</option>
+          <option value="electricidad">Electricidad</option>
+          <option value="telefono">Teléfono</option>
+          <option value="internet">Internet</option>
+          <option value="otro">Otro</option>
+        </select>
+
+        <label for="numero-referencia">Número de Referencia:</label>
+        <input type="text" id="numero-referencia" name="numero-referencia" required>
+
+        <label for="monto-impuesto">Monto a Pagar:</label>
+        <input type="number" id="monto-impuesto" name="monto-impuesto" required>
+
+        <label for="cuenta-pago">Cuenta de Pago:</label>
+        <input type="text" id="cuenta-pago" name="cuenta-pago" required>
+
+        <button type="submit">Pagar Impuesto</button>
+      </form>
+
+      <div class="transactions">
+        <h3>Historial de Pagos</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Referencia</th>
+              <th>Monto</th>
+              <th>Cuenta</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody id="impuestos-list"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Sección de Cheques -->
+    <div id="cheques" class="content-section">
+      <h2>Emisión de Cheques</h2>
+      <form id="form-cheques">
+        <label for="cuenta-origen">Cuenta Origen:</label>
+        <input type="text" id="cuenta-origen" name="cuenta-origen" required>
+
+        <label for="numero-cheque">Número de Cheque:</label>
+        <input type="text" id="numero-cheque" name="numero-cheque" required>
+
+        <label for="monto-cheque">Monto:</label>
+        <input type="number" id="monto-cheque" name="monto-cheque" required>
+
+        <label for="concepto-cheque">Concepto:</label>
+        <input type="text" id="concepto-cheque" name="concepto-cheque" required>
+
+        <button type="submit">Emitir Cheque</button>
+      </form>
+    </div>
+
+    <!-- Sección de Serrucho -->
+    <div id="serrucho" class="content-section">
+      <h2>Mantenimiento de Serrucho</h2>
+      <form id="form-serrucho">
+        <label for="tipo-serrucho">Tipo de Serrucho:</label>
+        <input type="text" id="tipo-serrucho" name="tipo-serrucho" required>
+
+        <label for="marca-serrucho">Marca:</label>
+        <input type="text" id="marca-serrucho" name="marca-serrucho" required>
+
+        <label for="cantidad-serrucho">Cantidad:</label>
+        <input type="number" id="cantidad-serrucho" name="cantidad-serrucho" required>
+
+        <label for="descripcion-serrucho">Descripción:</label>
+        <input type="text" id="descripcion-serrucho" name="descripcion-serrucho" required>
+
+        <button type="submit">Guardar Serrucho</button>
+      </form>
+    </div>
+
+    <!-- Sección de Depósito -->
+    <div id="deposito" class="content-section">
+      <h2>Depósito</h2>
+      <form id="form-deposito">
+        <label for="cuenta-deposito">Cuenta de Depósito:</label>
+        <input type="text" id="cuenta-deposito" name="cuenta-deposito" required>
+
+        <label for="monto-deposito">Monto:</label>
+        <input type="number" id="monto-deposito" name="monto-deposito" required>
+
+        <label for="referencia-deposito">Referencia:</label>
+        <input type="text" id="referencia-deposito" name="referencia-deposito" required>
+
+        <label for="concepto-deposito">Concepto:</label>
+        <input type="text" id="concepto-deposito" name="concepto-deposito" required>
+
+        <button type="submit">Realizar Depósito</button>
+      </form>
+
+      <div class="transactions">
+        <h3>Historial de Depósitos</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Cuenta</th>
+              <th>Monto</th>
+              <th>Referencia</th>
+              <th>Concepto</th>
+            </tr>
+          </thead>
+          <tbody id="deposito-list"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- NUEVA SECCIÓN: Beneficiario -->
+    <div id="beneficiario" class="content-section">
+      <h2>Beneficiario</h2>
+      <form id="form-beneficiario">
+        <label for="nombre-beneficiario">Nombre Beneficiario:</label>
+        <input type="text" id="nombre-beneficiario" name="nombre-beneficiario" required>
+        
+        <label for="cuenta-beneficiario">Número de Cuenta:</label>
+        <input type="text" id="cuenta-beneficiario" name="cuenta-beneficiario" required>
+        
+        <label for="relacion-beneficiario">Relación:</label>
+        <input type="text" id="relacion-beneficiario" name="relacion-beneficiario" required>
+        
+        <button type="submit">Guardar Beneficiario</button>
+      </form>
+      <div class="transactions">
+        <h3>Lista de Beneficiarios</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Número de Cuenta</th>
+              <th>Relación</th>
+            </tr>
+          </thead>
+          <tbody id="beneficiario-list"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmación de Cierre de Sesión -->
+  <div id="logout-modal">
+    <div class="modal-content">
+      <h2>¿Seguro que quieres cerrar sesión?</h2>
+      <button class="confirm" id="confirm-logout">Sí</button>
+      <button class="cancel" id="cancel-logout">No</button>
+    </div>
+  </div>
+
+  <script src="menuacs.js"></script>
 </body>
 </html>
