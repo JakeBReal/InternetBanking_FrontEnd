@@ -208,29 +208,113 @@ body {
 
 /* Ejemplo de tabla (transacciones) */
 .transactions {
-    margin-top: 20px;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transactions h3 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 1rem;
 }
 
 .transactions table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.transactions th, .transactions td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
+    margin-top: 1rem;
+    background-color: #ffffff;
 }
 
 .transactions th {
-    background: #1E56A0;
-    color: white;
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
 }
 
-.transactions tbody tr:hover {
-    background-color: #f1f1f1;
+.transactions td {
+    padding: 12px;
+    border-bottom: 1px solid #dee2e6;
+    color: #212529;
+}
+
+.transactions tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilos para el formulario de transacciones */
+#form-transacciones {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+#form-transacciones label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #495057;
+    font-weight: 500;
+}
+
+#form-transacciones input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+#form-transacciones input:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+#form-transacciones button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#form-transacciones button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .transactions {
+        padding: 1rem;
+    }
+    
+    .transactions td, 
+    .transactions th {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+    
+    #form-transacciones {
+        padding: 1rem;
+    }
 }
 
 /* Tarjetas */

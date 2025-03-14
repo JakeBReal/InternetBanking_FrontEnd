@@ -25,14 +25,77 @@ document.addEventListener("DOMContentLoaded", function () {
         serrucho.style.display = "none";
     }
 
+    // Función para obtener y mostrar los saldos de las cuentas
+    async function actualizarSaldos() {
+        try {
+            const response = await fetch('http://localhost:3000/api/cuentas');
+            const cuentas = await response.json();
+            
+            // Inicializar los saldos
+            let saldoCorriente = "0";
+            let saldoAhorro = "0";
+
+            // Procesar cada cuenta del array
+            cuentas.forEach(cuenta => {
+                if (cuenta.tipo_cuenta === "1") {
+                    saldoCorriente = cuenta.monto;
+                } else if (cuenta.tipo_cuenta === "2") {
+                    saldoAhorro = cuenta.monto;
+                }
+            });
+            
+            // Actualizar los saldos en el HTML
+            const saldosCorriente = document.querySelectorAll('.account-box .balance');
+            saldosCorriente[0].textContent = `$${saldoCorriente}`;
+            saldosCorriente[1].textContent = `$${saldoAhorro}`;
+        } catch (error) {
+            console.error('Error al obtener los saldos:', error);
+        }
+    }
+
+    // Actualizar saldos cuando se carga la página
+    actualizarSaldos();
+
     document.getElementById("inicio-btn").addEventListener("click", () => {
         ocultarSecciones();
         inicio.style.display = "block";
+        actualizarSaldos(); // Actualizar saldos cuando se muestra la sección
     });
+
+    // Función para cargar el historial de transacciones
+    async function cargarTransacciones() {
+        try {
+            const response = await fetch('http://localhost:3000/api/transacciones');
+            const transacciones = await response.json();
+            
+            const transactionsList = document.getElementById("transactions-list");
+            // Limpiar la tabla antes de agregar nuevas transacciones
+            transactionsList.innerHTML = '';
+            
+            // Ordenar las transacciones por fecha (más recientes primero)
+            transacciones.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+
+            transacciones.forEach(transaccion => {
+                const fecha = new Date(transaccion.fecha).toLocaleDateString();
+                const newTransfer = document.createElement("tr");
+                newTransfer.innerHTML = `
+                    <td>${fecha}</td>
+                    <td>${transaccion.cuenta_origen}</td>
+                    <td>${transaccion.cuenta_destino}</td>
+                    <td>$${transaccion.monto}</td>
+                    <td>${transaccion.concepto}</td>
+                `;
+                transactionsList.appendChild(newTransfer);
+            });
+        } catch (error) {
+            console.error('Error al cargar las transacciones:', error);
+        }
+    }
 
     document.getElementById("transacciones-btn").addEventListener("click", () => {
         ocultarSecciones();
         transferencias.style.display = "block";
+        cargarTransacciones(); // Cargar transacciones cuando se muestra la sección
     });
 
     document.getElementById("tarjetas-btn").addEventListener("click", () => {
@@ -59,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Manejo del formulario de transferencias
     const formTransferencias = document.getElementById("form-transacciones");
 
-    formTransferencias.addEventListener("submit", function (e) {
+    formTransferencias.addEventListener("submit", async function (e) {
         e.preventDefault();
 
         const origen = document.getElementById("origen").value;
@@ -67,42 +130,42 @@ document.addEventListener("DOMContentLoaded", function () {
         const monto = document.getElementById("monto").value;
         const concepto = document.getElementById("concepto").value;
 
-        const fecha = new Date().toLocaleDateString();
+        try {
+            const response = await fetch('http://localhost:3000/api/cuentas/transaccion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    cuenta_origen: origen,
+                    cuenta_destino: destino,
+                    monto: parseFloat(monto),
+                    concepto: concepto
+                })
+            });
 
-        // Asegurar que exista la tabla antes de agregar una fila
-        let transactionsList = document.getElementById("transactions-list");
-        if (!transactionsList) {
-            transactionsList = document.createElement("tbody");
-            transactionsList.id = "transactions-list";
-
-            const table = document.createElement("table");
-            table.innerHTML = `
-                <thead>
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Origen</th>
-                        <th>Destino</th>
-                        <th>Monto</th>
-                        <th>Concepto</th>
-                    </tr>
-                </thead>
-            `;
-            table.appendChild(transactionsList);
-            transferencias.appendChild(table);
+            if (response.ok) {
+                alert('Transacción realizada con éxito');
+                
+                // Ocultar todas las secciones y mostrar la sección de estado
+                ocultarSecciones();
+                inicio.style.display = "block";
+                
+                // Actualizar los saldos después de la transacción
+                await actualizarSaldos();
+                
+                // Recargar la lista de transacciones en segundo plano
+                cargarTransacciones();
+                
+                formTransferencias.reset();
+            } else {
+                const errorData = await response.json();
+                alert('Error en la transacción: ' + (errorData.message || 'Error desconocido'));
+            }
+        } catch (error) {
+            console.error('Error al realizar la transacción:', error);
+            alert('Error al realizar la transacción. Por favor, intente nuevamente.');
         }
-
-        const newTransfer = document.createElement("tr");
-        newTransfer.innerHTML = `
-            <td>${fecha}</td>
-            <td>${origen}</td>
-            <td>${destino}</td>
-            <td>${monto}</td>
-            <td>${concepto}</td>
-        `;
-
-        transactionsList.appendChild(newTransfer);
-
-        formTransferencias.reset();
     });
 
     // Manejo del formulario de cheques, similar al de transferencias
@@ -202,6 +265,86 @@ document.addEventListener("DOMContentLoaded", function () {
 
         formSerrucho.reset();
     });
+
+    // Función para cargar el historial de servicios pagados
+    async function cargarHistorialServicios() {
+        try {
+            const response = await fetch('http://localhost:3000/api/servicios');
+            const servicios = await response.json();
+            
+            const serviciosList = document.getElementById("impuestos-list");
+            // Limpiar la tabla antes de agregar nuevos servicios
+            serviciosList.innerHTML = '';
+            
+            // Ordenar los servicios por fecha (más recientes primero)
+            servicios.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+
+            servicios.forEach(servicio => {
+                const fecha = new Date(servicio.fecha).toLocaleDateString();
+                const newServicio = document.createElement("tr");
+                newServicio.innerHTML = `
+                    <td>${servicio.tipo_de_impuesto}</td>
+                    <td>${servicio.numero_referencia}</td>
+                    <td>$${servicio.monto}</td>
+                    <td>${servicio.cuenta_pago}</td>
+                    <td>${fecha}</td>
+                `;
+                serviciosList.appendChild(newServicio);
+            });
+        } catch (error) {
+            console.error('Error al cargar el historial de servicios:', error);
+        }
+    }
+
+    // Manejo del formulario de impuestos
+    const formImpuestos = document.getElementById("form-impuestos");
+    formImpuestos.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const tipoImpuesto = document.getElementById("tipo-impuesto").value;
+        const numeroReferencia = document.getElementById("numero-referencia").value;
+        const montoImpuesto = document.getElementById("monto-impuesto").value;
+        const cuentaPago = document.getElementById("cuenta-pago").value;
+
+        try {
+            const response = await fetch('http://localhost:3000/api/servicios', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    tipo_de_impuesto: tipoImpuesto,
+                    numero_referencia: numeroReferencia,
+                    monto: parseFloat(montoImpuesto),
+                    cuenta_pago: cuentaPago
+                })
+            });
+
+            if (response.ok) {
+                alert('Pago de servicio realizado con éxito');
+                
+                // Mostrar la pantalla de estado y actualizar saldos
+                ocultarSecciones();
+                inicio.style.display = "block";
+                await actualizarSaldos();
+                
+                // Esperar un momento y volver a la sección de impuestos con datos actualizados
+                setTimeout(() => {
+                    ocultarSecciones();
+                    impuestos.style.display = "block";
+                    cargarHistorialServicios();
+                }, 1500);
+                
+                formImpuestos.reset();
+            } else {
+                const errorData = await response.json();
+                alert('Error en el pago: ' + (errorData.message || 'Error desconocido'));
+            }
+        } catch (error) {
+            console.error('Error al realizar el pago:', error);
+            alert('Error al realizar el pago. Por favor, intente nuevamente.');
+        }
+    });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -261,13 +404,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("deposito-btn").addEventListener("click", () => {
         ocultarSecciones();
         deposito.style.display = "block";
-    });
-
-    // Manejo del formulario de transferencias (ejemplo existente)
-    const formTransferencias = document.getElementById("form-transacciones");
-    formTransferencias.addEventListener("submit", function (e) {
-        e.preventDefault();
-        // Lógica de transferencias...
     });
 
     // Manejo del formulario de depósito
