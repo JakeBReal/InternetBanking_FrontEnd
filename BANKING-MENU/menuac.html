@@ -50,7 +50,10 @@
             <h2>Transferencias</h2>
             <form id="form-transacciones">
                 <label for="origen">Origen:</label>
-                <input type="text" id="origen" name="origen" required>
+                <select id="origen" name="origen" required>
+                    <option value="">Seleccione una cuenta</option>
+                    <!-- Las opciones se cargarán dinámicamente -->
+                </select>
 
                 <label for="destino">Cuenta de Destino:</label>
                 <input type="text" id="destino" name="destino" required>
@@ -131,7 +134,10 @@
                 <input type="number" id="monto-impuesto" name="monto-impuesto" required>
 
                 <label for="cuenta-pago">Cuenta de Pago:</label>
-                <input type="text" id="cuenta-pago" name="cuenta-pago" required>
+                <select id="cuenta-pago" name="cuenta-pago" required>
+                    <option value="">Seleccione una cuenta</option>
+                    <!-- Las opciones se cargarán dinámicamente -->
+                </select>
 
                 <button type="submit">Pagar Impuesto</button>
             </form>
@@ -201,7 +207,10 @@
             <h2>Depósito</h2>
             <form id="form-deposito">
                 <label for="cuenta-deposito">Cuenta de Depósito:</label>
-                <input type="text" id="cuenta-deposito" name="cuenta-deposito" required>
+                <select id="cuenta-deposito" name="cuenta-deposito" required>
+                    <option value="">Seleccione una cuenta</option>
+                    <!-- Las opciones se cargarán dinámicamente -->
+                </select>
 
                 <label for="monto-deposito">Monto:</label>
                 <input type="number" id="monto-deposito" name="monto-deposito" required>
