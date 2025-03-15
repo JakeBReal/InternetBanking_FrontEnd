@@ -20,34 +20,38 @@ form2.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   try {
-    const rol = document.getElementById('email').value;
-    const clave = document.getElementById('password').value;
+    const cedula = document.getElementById('cedula').value;
+    const contrasena = document.getElementById('password').value;
 
-    let response = await fetch('http://localhost:3000/login', {
+    let response = await fetch('http://localhost:3000/api/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            rol,
-            clave,
-        }), // Enviar datos en JSON
+            cedula,
+            contrasena,
+        }),
     });
 
     if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Error en el inicio de sesión');
     }
 
-    response = await response.json();
-    if(response.length){
-        window.location.href = "../Pagina-Principal/PaginaPrincipal.html";
-
-    }else{
-        alert("Usuario o contraseña incorrectos");
+    const result = await response.json();
+    
+    if(result.id) {
+        // Guardar el token en localStorage para futuras solicitudes autenticadas
+        localStorage.setItem('id', result.id);
+        // Redirigir a la página principal del banco
+        window.location.href = "../BANKING-MENU/menuac.html";
+    } else {
+        alert("Cédula o contraseña incorrectos");
     }
-} catch (err) {
-    console.error('Error adding food to table:', err);
-}
+  } catch (err) {
+    console.error('Error al iniciar sesión:', err);
+    alert("Error al iniciar sesión: " + err.message);
+  }
 
   form2.reset();
 });
@@ -61,35 +65,42 @@ var caja_trasera_login = document.querySelector(".caja_trasera_login")
 var caja_trasera_register = document.querySelector(".caja_trasera_register")
 
 
-const usuario =async ()=>{
+const usuario = async () => {
     const nombre = document.getElementById('nombre').value;
     const email = document.getElementById('correo').value;
     const rol = document.getElementById('usuario').value;
+    const cedula = document.getElementById('cedula').value;
     const clave = document.getElementById('clave').value;
 
     try {
-      let response = await fetch('http://localhost:3000/usuario', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          nombre: nombre,
-          email,
-          rol,
-          clave
-        }), // Enviar datos en JSON
-      });
+        // Nuevo endpoint para el registro de usuarios
+        let response = await fetch('http://localhost:3000/api/usuarios', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                nombre: nombre,
+                correo: email,
+                usuario: rol,
+                cedula: cedula,
+                contrasena: clave
+            }),
+        });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+        if (!response.ok) {
+            throw new Error('Error en el registro de usuario');
+        }
 
-      response = await response.json();
-      console.log('Usuario creado:', response);
-    alert("Usuario creado correctamente");
+        const result = await response.json();
+        alert("Usuario registrado correctamente");
+        
+        // Redireccionar a la pantalla de login automáticamente
+        iniciarsesion();
+        
     } catch (err) {
-      console.error('Error creando usuario:', err);
+        console.error('Error al registrar usuario:', err);
+        alert("Error al registrar usuario: " + err.message);
     }
 }
 
