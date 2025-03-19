@@ -72,7 +72,6 @@ const usuario = async () => {
     const cedula = document.getElementById('cedulaa').value;
     const clave = document.getElementById('clave').value;
     
- return 
     try {
         // Nuevo endpoint para el registro de usuarios
         let response = await fetch('http://localhost:3000/api/usuarios', {
