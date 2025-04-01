@@ -1,52 +1,61 @@
-/* Estilo para el cuerpo */
+/* =======================
+   ESTILOS GENERALES
+========================= */
+
+/* Cuerpo */
 body {
-    display: flex;
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #F4F6F9;
-}
-
-/* Estilo de la barra lateral */
-.sidebar {
+  }
+  
+  /* Contenedor principal (sidebar y contenido) */
+  .container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 100vh;
+  }
+  
+  /* =======================
+     BARRA LATERAL (SIDEBAR)
+  ========================= */
+  .sidebar {
     width: 250px;
     background-color: #1E56A0;
     color: white;
     padding: 20px;
-    height: 100vh;
-    display: flex;             /* Importante para usar margin-top: auto en el último li */
+    flex-shrink: 0;
+    display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* Logo */
-.sidebar img {
+  }
+  
+  .sidebar img {
     width: 60px;
     display: block;
     margin: 0 auto 20px;
-}
-
-/* Lista de navegación (se hace flex para empujar el último li al fondo) */
-.sidebar ul {
+  }
+  
+  .sidebar ul {
     list-style: none;
     padding: 0;
     width: 100%;
-    display: flex;            /* Flex en la lista */
-    flex-direction: column;   /* Elementos en columna */
-    height: 100%;            /* Ocupa todo el alto disponible */
-}
-
-/* Cada li en la lista */
-.sidebar li {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .sidebar li {
     padding: 12px;
     border-radius: 5px;
     margin: 5px 0;
     display: flex;
     align-items: center;
     transition: background-color 0.3s ease;
-}
-
-/* Enlaces en la barra lateral */
-.sidebar li a {
+  }
+  
+  .sidebar li a {
     text-decoration: none;
     color: white;
     display: flex;
@@ -54,102 +63,113 @@ body {
     gap: 10px;
     font-size: 16px;
     width: 100%;
-}
-
-/* Hover para cualquier enlace de la lista */
-.sidebar li a:hover {
+  }
+  
+  .sidebar li a:hover {
     background-color: #E63946;
     border-radius: 5px;
     padding: 10px;
-}
-
-/* El li de "Cerrar sesión" se va al fondo con margin-top: auto */
-.logout {
-    margin-top: auto;  /* Empuja este li al final de la lista */
+  }
+  
+  .logout {
+    margin-top: auto;
     width: 100%;
     text-align: center;
-    background-color: transparent; /* Sin fondo rojo por defecto */
-}
-
-/* ====================================
-   Secciones de contenido principal
-   ==================================== */
-
-/* Contenido principal */
-.main-content {
+    background-color: transparent;
+  }
+  
+  /* =======================
+     CONTENIDO PRINCIPAL
+  ========================= */
+  .main-content {
     flex: 1;
     padding: 20px;
-    width: 100%;
-}
-
-/* Ocultamos las secciones por defecto */
-.content-section {
+  }
+  
+  /* Ocultar secciones por defecto */
+  .content-section {
     display: none;
-}
-
-/* Sección de bienvenida (ejemplo) */
-#bienvenida {
+  }
+  
+  /* Sección de bienvenida */
+  #bienvenida {
     text-align: center;
     margin-top: 20%;
-    display: block; /* Si deseas mostrar esta sección por defecto */
-}
-
-/* Sección de cuenta (ejemplo) */
-.account-balance {
+    display: block;
+  }
+  
+  /* Sección de cuenta */
+  .account-balance {
     display: flex;
     gap: 20px;
     justify-content: center;
-}
-
-.account-box {
+  }
+  
+  .account-box {
     background: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
     flex: 1;
-}
-
-.account-box .balance {
+  }
+  
+  .account-box .balance {
     font-size: 24px;
     font-weight: bold;
     color: #333;
-}
-
-/* ====================================
-   Secciones de mantenimiento (transferencias, cheques, etc.)
-   ==================================== */
-
-/* Ajuste para secciones (ejemplo: #transacciones, #cheques, etc.) */
-#transacciones,
-#impuestos,
-#cheques,
-#serrucho {
+  }
+  
+  /* =======================
+     SECCIONES DE MANTENIMIENTO
+     (transacciones, impuestos, cheques, serrucho,
+      depósito, tarjetas-add, perfil, admin)
+  ========================= */
+  #transacciones,
+  #impuestos,
+  #cheques,
+  #serrucho,
+  #deposito,
+  #tarjetas-add,
+  #perfil,
+  #admin {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     gap: 20px;
     margin-top: 20px;
-    text-align: center; /* Centra el título (h2) */
-}
-
-/* Títulos */
-#transacciones h2,
-#impuestos h2,
-#cheques h2,
-#serrucho h2 {
+    text-align: center;
+  }
+  
+  #transacciones h2,
+  #impuestos h2,
+  #cheques h2,
+  #serrucho h2,
+  #deposito h2,
+  #tarjetas-add h2,
+  #perfil h2,
+  #admin h2 {
     font-size: 24px;
     font-weight: bold;
     color: #333;
     margin: 0;
-}
-
-/* Formularios */
-#form-transacciones,
-#form-impuestos,
-#form-cheques,
-#form-serrucho {
+  }
+  
+  /* =======================
+     FORMULARIOS
+  ========================= */
+  #form-transacciones,
+  #form-impuestos,
+  #form-cheques,
+  #form-serrucho,
+  #form-deposito,
+  #form-tarjetas,
+  #form-admin-crear-tarjeta,
+  #form-admin-eliminar-tarjeta,
+  #form-admin-anadir-fondos,
+  #form-admin-eliminar-fondos,
+  #form-admin-usuarios {
     width: 100%;
     max-width: 500px;
     background-color: white;
@@ -159,133 +179,152 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin: 0 auto; /* Centra el formulario horizontalmente */
-}
-
-/* Labels */
-#form-transacciones label,
-#form-impuestos label,
-#form-cheques label,
-#form-serrucho label {
+    margin: 0 auto;
+  }
+  
+  /* Labels */
+  #form-transacciones label,
+  #form-impuestos label,
+  #form-cheques label,
+  #form-serrucho label,
+  #form-deposito label,
+  #form-tarjetas label,
+  #form-admin-crear-tarjeta label,
+  #form-admin-eliminar-tarjeta label,
+  #form-admin-anadir-fondos label,
+  #form-admin-eliminar-fondos label,
+  #form-admin-usuarios label {
     font-size: 14px;
     color: #333;
     font-weight: bold;
     text-align: left;
     margin-bottom: 5px;
-}
-
-/* Inputs */
-#form-transacciones input,
-#form-impuestos input,
-#form-cheques input,
-#form-serrucho input {
+  }
+  
+  /* Inputs */
+  #form-transacciones input,
+  #form-impuestos input,
+  #form-cheques input,
+  #form-serrucho input,
+  #form-deposito input,
+  #form-tarjetas input,
+  #form-admin-crear-tarjeta input,
+  #form-admin-eliminar-tarjeta input,
+  #form-admin-anadir-fondos input,
+  #form-admin-eliminar-fondos input,
+  #form-admin-usuarios input {
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ddd;
     border-radius: 5px;
-}
-
-/* Botones */
-#form-transacciones button,
-#form-impuestos button,
-#form-cheques button,
-#form-serrucho button {
+  }
+  
+  /* Botones */
+  #form-transacciones button,
+  #form-impuestos button,
+  #form-cheques button,
+  #form-serrucho button,
+  #form-deposito button,
+  #form-tarjetas button,
+  #form-admin-crear-tarjeta button,
+  #form-admin-eliminar-tarjeta button,
+  #form-admin-anadir-fondos button,
+  #form-admin-eliminar-fondos button,
+  #form-admin-usuarios button {
     background-color: #1E56A0;
     color: white;
     padding: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-/* Hover en botones */
-#form-transacciones button:hover,
-#form-impuestos button:hover,
-#form-cheques button:hover,
-#form-serrucho button:hover {
+  }
+  
+  #form-transacciones button:hover,
+  #form-impuestos button:hover,
+  #form-cheques button:hover,
+  #form-serrucho button:hover,
+  #form-deposito button:hover,
+  #form-tarjetas button:hover,
+  #form-admin-crear-tarjeta button:hover,
+  #form-admin-eliminar-tarjeta button:hover,
+  #form-admin-anadir-fondos button:hover,
+  #form-admin-eliminar-fondos button:hover,
+  #form-admin-usuarios button:hover {
     background-color: #E63946;
-}
-
-/* Ejemplo de tabla (transacciones) */
-.transactions {
+  }
+  
+  /* =======================
+     TABLAS (estilo depósitos y otros)
+  ========================= */
+  .transactions {
     margin-top: 2rem;
     padding: 1.5rem;
     background-color: #ffffff;
-    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.transactions h3 {
-    color: #333;
-    margin-bottom: 1.5rem;
-    font-size: 1.2rem;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 0.5rem;
-}
-
-.table-container {
+  }
+  
+  .table-container {
     overflow-x: auto;
     margin-top: 1rem;
-}
-
-.transactions table {
+  }
+  
+  .transactions table {
     width: 100%;
     border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
     margin-top: 1rem;
-    background-color: #ffffff;
-}
-
-.transactions th {
-    background-color: #f8f9fa;
-    color: #495057;
+  }
+  
+  .transactions th,
+  .transactions td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .transactions th {
+    background: #1E56A0;
+    color: white;
     font-weight: 600;
-    padding: 12px;
     text-align: left;
-    border-bottom: 2px solid #dee2e6;
-}
-
-.transactions td {
-    padding: 12px;
-    border-bottom: 1px solid #dee2e6;
-    color: #212529;
-}
-
-.transactions tr:hover {
+  }
+  
+  .transactions tr:hover {
     background-color: #f8f9fa;
-}
-
-/* Estilos para el formulario de transacciones */
-#form-transacciones {
+  }
+  
+  /* Extra para el formulario de transacciones */
+  #form-transacciones {
     background-color: #ffffff;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
-}
-
-#form-transacciones label {
+  }
+  
+  #form-transacciones label {
     display: block;
     margin-bottom: 0.5rem;
     color: #495057;
     font-weight: 500;
-}
-
-#form-transacciones input {
+  }
+  
+  #form-transacciones input {
     width: 100%;
     padding: 0.75rem;
     margin-bottom: 1rem;
     border: 1px solid #ced4da;
     border-radius: 4px;
     font-size: 1rem;
-}
-
-#form-transacciones input:focus {
+  }
+  
+  #form-transacciones input:focus {
     outline: none;
     border-color: #80bdff;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
-#form-transacciones button {
+  }
+  
+  #form-transacciones button {
     background-color: #007bff;
     color: white;
     padding: 0.75rem 1.5rem;
@@ -294,47 +333,34 @@ body {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.2s;
-}
-
-#form-transacciones button:hover {
+  }
+  
+  #form-transacciones button:hover {
     background-color: #0056b3;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .transactions {
-        padding: 1rem;
-    }
-    
-    .transactions td, 
-    .transactions th {
-        padding: 8px;
-        font-size: 0.9rem;
-    }
-    
-    #form-transacciones {
-        padding: 1rem;
-    }
-}
-
-/* Tarjetas */
-#tarjetas {
+  }
+  
+  /* =======================
+     SECCIONES ESPECÍFICAS
+  ========================= */
+  
+  /* Tarjetas */
+  #tarjetas {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
     width: 100%;
-}
-
-.tarjetas {
+  }
+  
+  .tarjetas {
     display: flex;
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
-}
-
-.tarjeta {
+  }
+  
+  .tarjeta {
     background-color: #fff;
     width: 280px;
     height: 170px;
@@ -348,39 +374,38 @@ body {
     position: relative;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
-}
-
-.tarjeta:hover {
+  }
+  
+  .tarjeta:hover {
     transform: translateY(-5px);
-}
-
-.tarjeta .detalles {
+  }
+  
+  .tarjeta .detalles {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-}
-
-.tarjeta .detalles .tipo {
+  }
+  
+  .tarjeta .detalles .tipo {
     font-size: 14px;
     font-weight: bold;
     color: #333;
-}
-
-.tarjeta .detalles .banco {
+  }
+  
+  .tarjeta .detalles .banco {
     font-size: 12px;
     color: #555;
-}
-
-.tarjeta p {
+  }
+  
+  .tarjeta p {
     font-size: 16px;
     color: #333;
     font-weight: 600;
     margin: 5px 0;
-}
-
-/* Tarjeta de agregar */
-.tarjeta.agregar {
+  }
+  
+  .tarjeta.agregar {
     background-color: #f0f0f0;
     cursor: pointer;
     display: flex;
@@ -394,15 +419,15 @@ body {
     width: 280px;
     height: 170px;
     transition: background-color 0.3s ease;
-}
-
-.tarjeta.agregar:hover {
+  }
+  
+  .tarjeta.agregar:hover {
     background-color: #E63946;
     color: white;
-}
-
-/* Sección de Depósito */
-#deposito {
+  }
+  
+  /* Sección de Depósito */
+  #deposito {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -410,17 +435,16 @@ body {
     gap: 20px;
     margin-top: 20px;
     text-align: center;
-}
-
-#deposito h2 {
+  }
+  
+  #deposito h2 {
     font-size: 24px;
     font-weight: bold;
     color: #333;
     margin: 0;
-}
-
-/* Formulario de Depósito */
-#form-deposito {
+  }
+  
+  #form-deposito {
     width: 100%;
     max-width: 500px;
     background-color: white;
@@ -431,62 +455,175 @@ body {
     flex-direction: column;
     gap: 15px;
     margin: 0 auto;
-}
-
-#form-deposito label {
+  }
+  
+  #form-deposito label {
     font-size: 14px;
     color: #333;
     font-weight: bold;
     text-align: left;
     margin-bottom: 5px;
-}
-
-#form-deposito input {
+  }
+  
+  #form-deposito input {
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ddd;
     border-radius: 5px;
-}
-
-#form-deposito button {
+  }
+  
+  #form-deposito button {
     background-color: #1E56A0;
     color: white;
     padding: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-#form-deposito button:hover {
+  }
+  
+  #form-deposito button:hover {
     background-color: #E63946;
-}
-
-/* Historial de Depósitos */
-#deposito .transactions {
+  }
+  
+  #deposito .transactions {
     margin-top: 20px;
-}
-
-#deposito .transactions table {
-    width: 100%;
-    border-collapse: collapse;
+  }
+  
+  /* Sección de Perfil */
+  #perfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  #perfil h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+  }
+  
+  .profile-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  #profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+  }
+  
+  .profile-details {
     background: white;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-#deposito .transactions th,
-#deposito .transactions td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-}
-
-#deposito .transactions th {
-    background: #1E56A0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 250px;
+    max-width: 350px;
+    text-align: left;
+  }
+  
+  .profile-details p {
+    margin: 10px 0;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  
+  /* Sección de Admin */
+  #admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .admin-menu {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .admin-menu button {
+    background-color: #1E56A0;
     color: white;
-}
-
-#deposito .transactions tbody tr:hover {
-    background-color: #f1f1f1;
-}
-
-
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .admin-menu button:hover {
+    background-color: #E63946;
+  }
+  
+  #admin form {
+    width: 100%;
+    max-width: 500px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 0 auto;
+  }
+  
+  .admin-section {
+    display: none;
+  }
+  
+  .admin-section h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #1E56A0;
+  }
+  
+  /* =======================
+     RESPONSIVE DESIGN
+  ========================= */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+    .sidebar {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+    .main-content {
+      padding: 10px;
+    }
+    
+    .transactions {
+      padding: 1rem;
+    }
+    
+    .transactions td,
+    .transactions th {
+      padding: 8px;
+      font-size: 0.9rem;
+    }
+    
+    #form-transacciones {
+      padding: 1rem;
+    }
+  }
+  
