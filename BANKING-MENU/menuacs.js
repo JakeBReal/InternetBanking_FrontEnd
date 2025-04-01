@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const deposito = document.getElementById("deposito");
   const tarjetasAdd = document.getElementById("tarjetas-add");
   const perfil = document.getElementById("perfil");
-  const admin = document.getElementById("admin");
 
   // Ocultar todas las secciones por defecto excepto Bienvenida
   inicio.style.display = "none";
@@ -22,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
   deposito.style.display = "none";
   if (tarjetasAdd) tarjetasAdd.style.display = "none";
   if (perfil) perfil.style.display = "none";
-  if (admin) admin.style.display = "none";
 
   function ocultarSecciones() {
     bienvenida.style.display = "none";
@@ -35,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
     deposito.style.display = "none";
     if (tarjetasAdd) tarjetasAdd.style.display = "none";
     if (perfil) perfil.style.display = "none";
-    if (admin) admin.style.display = "none";
   }
 
   // =============================
@@ -227,11 +224,6 @@ document.addEventListener("DOMContentLoaded", function () {
     ocultarSecciones();
     perfil.style.display = "block";
     cargarPerfil();
-  });
-
-  document.getElementById("admin-btn").addEventListener("click", () => {
-    ocultarSecciones();
-    admin.style.display = "block";
   });
 
   // ======================
@@ -456,116 +448,6 @@ document.addEventListener("DOMContentLoaded", function () {
       formTarjetas.reset();
       ocultarSecciones();
       tarjetas.style.display = "block";
-    });
-  }
-
-  // =======================
-  // ADMIN PANEL - Submenú y Formularios
-  // =======================
-
-  // Referencias a botones y secciones de Admin
-  const adminBtnTarjetas = document.getElementById("admin-btn-tarjetas");
-  const adminBtnFondos = document.getElementById("admin-btn-fondos");
-  const adminBtnUsuarios = document.getElementById("admin-btn-usuarios");
-  const adminTarjetasSection = document.getElementById("admin-tarjetas-section");
-  const adminFondosSection = document.getElementById("admin-fondos-section");
-  const adminUsuariosSection = document.getElementById("admin-usuarios-section");
-
-  function hideAllAdminSections() {
-    adminTarjetasSection.style.display = "none";
-    adminFondosSection.style.display = "none";
-    adminUsuariosSection.style.display = "none";
-  }
-
-  // Establecer sección por defecto en Admin (Tarjetas)
-  hideAllAdminSections();
-  if (adminTarjetasSection) adminTarjetasSection.style.display = "block";
-
-  if (adminBtnTarjetas) {
-    adminBtnTarjetas.addEventListener("click", function() {
-      hideAllAdminSections();
-      adminTarjetasSection.style.display = "block";
-    });
-  }
-  if (adminBtnFondos) {
-    adminBtnFondos.addEventListener("click", function() {
-      hideAllAdminSections();
-      adminFondosSection.style.display = "block";
-    });
-  }
-  if (adminBtnUsuarios) {
-    adminBtnUsuarios.addEventListener("click", function() {
-      hideAllAdminSections();
-      adminUsuariosSection.style.display = "block";
-    });
-  }
-
-  // Admin: Crear Tarjeta
-  const formAdminCrearTarjeta = document.getElementById("form-admin-crear-tarjeta");
-  if (formAdminCrearTarjeta) {
-    formAdminCrearTarjeta.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const tipo = document.getElementById("admin-tipo-tarjeta").value;
-      const banco = document.getElementById("admin-banco-tarjeta").value;
-      const nombre = document.getElementById("admin-nombre-titular").value;
-      const numero = document.getElementById("admin-numero-tarjeta").value;
-      const expiracion = document.getElementById("admin-tarjeta-expiracion").value;
-      const cvv = document.getElementById("admin-tarjeta-cvv").value;
-      alert("Tarjeta creada (simulación).");
-      formAdminCrearTarjeta.reset();
-    });
-  }
-
-  // Admin: Eliminar Tarjeta
-  const formAdminEliminarTarjeta = document.getElementById("form-admin-eliminar-tarjeta");
-  if (formAdminEliminarTarjeta) {
-    formAdminEliminarTarjeta.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const numeroEliminar = document.getElementById("admin-numero-tarjeta-eliminar").value;
-      alert("Tarjeta eliminada (simulación).");
-      formAdminEliminarTarjeta.reset();
-    });
-  }
-
-  // Admin: Añadir Fondos
-  const formAdminAnadirFondos = document.getElementById("form-admin-anadir-fondos");
-  if (formAdminAnadirFondos) {
-    formAdminAnadirFondos.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const cuenta = document.getElementById("admin-cuenta-fondos").value;
-      const monto = document.getElementById("admin-monto-anadir").value;
-      alert("Fondos añadidos (simulación).");
-      formAdminAnadirFondos.reset();
-    });
-  }
-
-  // Admin: Eliminar Fondos
-  const formAdminEliminarFondos = document.getElementById("form-admin-eliminar-fondos");
-  if (formAdminEliminarFondos) {
-    formAdminEliminarFondos.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const cuenta = document.getElementById("admin-cuenta-eliminar").value;
-      const monto = document.getElementById("admin-monto-eliminar").value;
-      alert("Fondos eliminados (simulación).");
-      formAdminEliminarFondos.reset();
-    });
-  }
-
-  // Admin: Usuarios (Eliminar y Actualizar)
-  const formAdminUsuarios = document.getElementById("form-admin-usuarios");
-  if (formAdminUsuarios) {
-    formAdminUsuarios.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const action = e.submitter.value;
-      if (action === "eliminar") {
-        const usuarioId = document.getElementById("admin-usuario-id").value;
-        alert("Usuario eliminado (simulación).");
-      } else if (action === "actualizar") {
-        const usuarioIdUpd = document.getElementById("admin-usuario-id-upd").value;
-        const nuevoNombre = document.getElementById("admin-usuario-nuevo").value;
-        alert("Usuario actualizado (simulación).");
-      }
-      formAdminUsuarios.reset();
     });
   }
 

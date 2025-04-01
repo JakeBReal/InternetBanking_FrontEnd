@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú de Banco - Administración</title>
+  <link rel="stylesheet" href="stylead.css">
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <img src="bank-logo-or-icon-design-on-white-background-illustration-vector-removebg-preview.png" 
+           alt="Logo" 
+           style="width: 120px; height: auto;">
+      <ul>
+        <li><a href="#" id="admin-tarjetas-btn">💳 Tarjetas</a></li>
+        <li><a href="#" id="admin-fondos-btn">💰 Fondos</a></li>
+        <li><a href="#" id="admin-transacciones-btn">📊 Monitoreo y Control de Transacciones</a></li>
+        <li><a href="#" id="admin-clientes-btn">👥 Gestión de Clientes</a></li>
+        <li><a href="#" id="admin-reportes-btn">📈 Reporte y Estadísticas</a></li>
+        <li class="logout"><a href="#">🚪 Cerrar sesión</a></li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <!-- Sección de Tarjetas -->
+      <div id="admin-tarjetas" class="content-section">
+        <h2>Mantenimiento de Tarjetas</h2>
+        <form id="form-admin-crear-tarjeta">
+          <h4>Crear Tarjeta</h4>
+          <label for="admin-tipo-tarjeta">Tipo de Tarjeta:</label>
+          <select id="admin-tipo-tarjeta" name="admin-tipo-tarjeta" required>
+            <option value="">Seleccione</option>
+            <option value="Débito">Débito</option>
+            <option value="Crédito">Crédito</option>
+          </select>
+          <label for="admin-banco-tarjeta">Banco:</label>
+          <input type="text" id="admin-banco-tarjeta" name="admin-banco-tarjeta" required>
+          <label for="admin-nombre-titular">Nombre del Titular:</label>
+          <input type="text" id="admin-nombre-titular" name="admin-nombre-titular" required>
+          <label for="admin-numero-tarjeta">Número de Tarjeta:</label>
+          <input type="text" id="admin-numero-tarjeta" name="admin-numero-tarjeta" required>
+          <label for="admin-tarjeta-expiracion">Fecha de Vencimiento (MM/AA):</label>
+          <input type="text" id="admin-tarjeta-expiracion" name="admin-tarjeta-expiracion" placeholder="MM/AA" required>
+          <label for="admin-tarjeta-cvv">CVV:</label>
+          <input type="number" id="admin-tarjeta-cvv" name="admin-tarjeta-cvv" required>
+          <button type="submit">Crear Tarjeta</button>
+        </form>
+        <form id="form-admin-eliminar-tarjeta">
+          <h4>Eliminar Tarjeta</h4>
+          <label for="admin-numero-tarjeta-eliminar">Número de Tarjeta:</label>
+          <input type="text" id="admin-numero-tarjeta-eliminar" name="admin-numero-tarjeta-eliminar" required>
+          <button type="submit">Eliminar Tarjeta</button>
+        </form>
+      </div>
+      
+      <!-- Sección de Fondos -->
+      <div id="admin-fondos" class="content-section">
+        <h2>Mantenimiento de Fondos</h2>
+        <form id="form-admin-anadir-fondos">
+          <h4>Añadir Fondos</h4>
+          <label for="admin-cuenta-fondos">Cuenta:</label>
+          <input type="text" id="admin-cuenta-fondos" name="admin-cuenta-fondos" required>
+          <label for="admin-monto-anadir">Monto a Añadir:</label>
+          <input type="number" id="admin-monto-anadir" name="admin-monto-anadir" required>
+          <button type="submit">Añadir Fondos</button>
+        </form>
+        <form id="form-admin-eliminar-fondos">
+          <h4>Eliminar Fondos</h4>
+          <label for="admin-cuenta-eliminar">Cuenta:</label>
+          <input type="text" id="admin-cuenta-eliminar" name="admin-cuenta-eliminar" required>
+          <label for="admin-monto-eliminar">Monto a Eliminar:</label>
+          <input type="number" id="admin-monto-eliminar" name="admin-monto-eliminar" required>
+          <button type="submit">Eliminar Fondos</button>
+        </form>
+      </div>
+      
+      <!-- Sección de Monitoreo y Control de Transacciones -->
+      <div id="admin-transacciones" class="content-section">
+        <h2>Monitoreo y Control de Transacciones</h2>
+        <div class="transactions">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Cuenta</th>
+                  <th>Tipo</th>
+                  <th>Monto</th>
+                  <th>Concepto</th>
+                </tr>
+              </thead>
+              <tbody id="transacciones-list">
+                <!-- Ejemplo de transacciones -->
+                <tr>
+                  <td>01/04/2025</td>
+                  <td>1234567890</td>
+                  <td>Transferencia</td>
+                  <td>$500.00</td>
+                  <td>Pago de servicios</td>
+                </tr>
+                <tr>
+                  <td>31/03/2025</td>
+                  <td>0987654321</td>
+                  <td>Depósito</td>
+                  <td>$1,200.00</td>
+                  <td>Nómina</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sección de Gestión de Clientes -->
+      <div id="admin-clientes" class="content-section">
+        <h2>Gestión de Clientes</h2>
+        <form id="form-buscar-clientes">
+          <label for="cliente-busqueda">Buscar Cliente:</label>
+          <input type="text" id="cliente-busqueda" name="cliente-busqueda" placeholder="Ingrese nombre, ID o correo" required>
+          <button type="submit">Buscar</button>
+        </form>
+        <div class="clientes-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+              </tr>
+            </thead>
+            <tbody id="clientes-list">
+              <!-- Los resultados se cargarán aquí -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- Sección de Reporte y Estadísticas -->
+      <div id="admin-reportes" class="content-section">
+        <h2>Reporte y Estadísticas</h2>
+        <div class="reportes-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Métrica</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody id="reportes-list">
+              <!-- Ejemplo de reporte -->
+              <tr>
+                <td>Total Clientes</td>
+                <td>150</td>
+              </tr>
+              <tr>
+                <td>Transacciones Totales</td>
+                <td>1200</td>
+              </tr>
+              <tr>
+                <td>Fondos Totales</td>
+                <td>$500,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <script src="menuad.js"></script>
+</body>
+</html>
