@@ -101,50 +101,21 @@
       <div id="tarjetas" class="content-section">
         <h2>Tarjetas</h2>
         <div class="tarjetas">
-          <!-- Aquí pueden ir las tarjetas existentes -->
-        </div>
-        <!-- Tarjeta para agregar nueva tarjeta -->
-        <div class="tarjeta agregar">
-          <span>+</span>
-          <p>Añadir nueva tarjeta</p>
-        </div>
-      </div>
-
-      <!-- Sección de Añadir Tarjeta -->
-      <div id="tarjetas-add" class="content-section">
-        <h2>Añadir Tarjeta</h2>
-        <form id="form-tarjetas">
-          <label for="tipo-tarjeta">Tipo de Tarjeta:</label>
-          <select id="tipo-tarjeta" name="tipo-tarjeta" required>
-            <option value="">Seleccione</option>
-            <option value="Débito">Débito</option>
-            <option value="Crédito">Crédito</option>
-          </select>
-          <label for="numero-tarjeta">Número de Tarjeta:</label>
-          <input type="text" id="numero-tarjeta" name="numero-tarjeta" required>
-          <label for="nombre-tarjeta">Nombre en la Tarjeta:</label>
-          <input type="text" id="nombre-tarjeta" name="nombre-tarjeta" required>
-          <label for="vencimiento-tarjeta">Fecha de Vencimiento (MM/AA):</label>
-          <input type="text" id="vencimiento-tarjeta" name="vencimiento-tarjeta" placeholder="MM/AA" required>
-          <label for="cvv-tarjeta">CVV:</label>
-          <input type="number" id="cvv-tarjeta" name="cvv-tarjeta" required>
-          <button type="submit">Guardar Tarjeta</button>
-          <button type="button" id="btn-salir-tarjeta">Salir</button>
-        </form>
-        <div class="transactions">
-          <h3>Historial de Tarjetas</h3>
-          <div class="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Tipo</th>
-                  <th>Número</th>
-                  <th>Nombre</th>
-                  <th>Vencimiento</th>
-                </tr>
-              </thead>
-              <tbody id="tarjetas-list"></tbody>
-            </table>
+          <div class="tarjeta">
+            <div class="detalles">
+              <span class="tipo">Débito</span>
+              <span class="banco">VISA</span>
+              <p>Juan Pérez</p>
+              <p>**** 1234</p>
+            </div>
+          </div>
+          <div class="tarjeta">
+            <div class="detalles">
+              <span class="tipo">Crédito</span>
+              <span class="banco">VISA</span>
+              <p>Juan Pérez</p>
+              <p>**** 5678</p>
+            </div>
           </div>
         </div>
       </div>

@@ -9,13 +9,11 @@
 <body>
   <div class="container">
     <div class="sidebar">
-      <img src="bank-logo-or-icon-design-on-white-background-illustration-vector-removebg-preview.png" 
-           alt="Logo" 
-           style="width: 120px; height: auto;">
+      <img src="bank-logo-or-icon-design-on-white-background-illustration-vector-removebg-preview.png" alt="Logo" style="width: 120px; height: auto;">
       <ul>
         <li><a href="#" id="admin-tarjetas-btn">💳 Tarjetas</a></li>
         <li><a href="#" id="admin-fondos-btn">💰 Fondos</a></li>
-        <li><a href="#" id="admin-transacciones-btn">📊 Monitoreo y Control de Transacciones</a></li>
+        <li><a href="#" id="admin-transacciones-btn">📊 Monitoreo y Control</a></li>
         <li><a href="#" id="admin-clientes-btn">👥 Gestión de Clientes</a></li>
         <li><a href="#" id="admin-reportes-btn">📈 Reporte y Estadísticas</a></li>
         <li class="logout"><a href="#">🚪 Cerrar sesión</a></li>
@@ -25,58 +23,119 @@
       <!-- Sección de Tarjetas -->
       <div id="admin-tarjetas" class="content-section">
         <h2>Mantenimiento de Tarjetas</h2>
-        <form id="form-admin-crear-tarjeta">
-          <h4>Crear Tarjeta</h4>
-          <label for="admin-tipo-tarjeta">Tipo de Tarjeta:</label>
-          <select id="admin-tipo-tarjeta" name="admin-tipo-tarjeta" required>
-            <option value="">Seleccione</option>
-            <option value="Débito">Débito</option>
-            <option value="Crédito">Crédito</option>
-          </select>
-          <label for="admin-banco-tarjeta">Banco:</label>
-          <input type="text" id="admin-banco-tarjeta" name="admin-banco-tarjeta" required>
-          <label for="admin-nombre-titular">Nombre del Titular:</label>
-          <input type="text" id="admin-nombre-titular" name="admin-nombre-titular" required>
-          <label for="admin-numero-tarjeta">Número de Tarjeta:</label>
-          <input type="text" id="admin-numero-tarjeta" name="admin-numero-tarjeta" required>
-          <label for="admin-tarjeta-expiracion">Fecha de Vencimiento (MM/AA):</label>
-          <input type="text" id="admin-tarjeta-expiracion" name="admin-tarjeta-expiracion" placeholder="MM/AA" required>
-          <label for="admin-tarjeta-cvv">CVV:</label>
-          <input type="number" id="admin-tarjeta-cvv" name="admin-tarjeta-cvv" required>
-          <button type="submit">Crear Tarjeta</button>
-        </form>
-        <form id="form-admin-eliminar-tarjeta">
-          <h4>Eliminar Tarjeta</h4>
-          <label for="admin-numero-tarjeta-eliminar">Número de Tarjeta:</label>
-          <input type="text" id="admin-numero-tarjeta-eliminar" name="admin-numero-tarjeta-eliminar" required>
-          <button type="submit">Eliminar Tarjeta</button>
-        </form>
+        <div class="tarjetas-content">
+          <!-- Panel de creación/eliminación de tarjeta -->
+          <div class="crear-tarjeta-panel">
+            <h4>Crear Tarjeta</h4>
+            <form id="form-admin-crear-tarjeta">
+              <label for="admin-tipo-tarjeta">Tipo de Tarjeta:</label>
+              <select id="admin-tipo-tarjeta" name="admin-tipo-tarjeta" required>
+                <option value="">Seleccione</option>
+                <option value="Débito">Débito</option>
+                <option value="Crédito">Crédito</option>
+              </select>
+              <label for="admin-banco-tarjeta">Banco:</label>
+              <input type="text" id="admin-banco-tarjeta" name="admin-banco-tarjeta" required>
+              <label for="admin-nombre-titular">Nombre del Titular:</label>
+              <input type="text" id="admin-nombre-titular" name="admin-nombre-titular" required>
+              <fieldset class="panel-cedula">
+                <legend>Información de Cédula</legend>
+                <label for="admin-cedula">Cédula:</label>
+                <input type="text" id="admin-cedula" name="admin-cedula" required>
+              </fieldset>
+              <label for="admin-numero-tarjeta">Número de Tarjeta:</label>
+              <input type="text" id="admin-numero-tarjeta" name="admin-numero-tarjeta" required>
+              <label for="admin-tarjeta-expiracion">Fecha de Vencimiento (MM/AA):</label>
+              <input type="text" id="admin-tarjeta-expiracion" name="admin-tarjeta-expiracion" placeholder="MM/AA" required>
+              <label for="admin-tarjeta-cvv">CVV:</label>
+              <input type="number" id="admin-tarjeta-cvv" name="admin-tarjeta-cvv" required>
+              <button type="submit">Crear Tarjeta</button>
+            </form>
+            <h4>Eliminar Tarjeta</h4>
+            <form id="form-admin-eliminar-tarjeta">
+              <label for="admin-numero-tarjeta-eliminar">Número de Tarjeta:</label>
+              <input type="text" id="admin-numero-tarjeta-eliminar" name="admin-numero-tarjeta-eliminar" required>
+              <button type="submit">Eliminar Tarjeta</button>
+            </form>
+          </div>
+          <!-- Panel de consulta de usuarios -->
+          <div class="consulta-usuarios-panel">
+            <h4>Consulta de Usuarios</h4>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                  </tr>
+                </thead>
+                <tbody id="usuarios-list">
+                  <!-- Se cargarán los datos de usuarios -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
       
       <!-- Sección de Fondos -->
       <div id="admin-fondos" class="content-section">
         <h2>Mantenimiento de Fondos</h2>
-        <form id="form-admin-anadir-fondos">
-          <h4>Añadir Fondos</h4>
-          <label for="admin-cuenta-fondos">Cuenta:</label>
-          <input type="text" id="admin-cuenta-fondos" name="admin-cuenta-fondos" required>
-          <label for="admin-monto-anadir">Monto a Añadir:</label>
-          <input type="number" id="admin-monto-anadir" name="admin-monto-anadir" required>
-          <button type="submit">Añadir Fondos</button>
-        </form>
-        <form id="form-admin-eliminar-fondos">
-          <h4>Eliminar Fondos</h4>
-          <label for="admin-cuenta-eliminar">Cuenta:</label>
-          <input type="text" id="admin-cuenta-eliminar" name="admin-cuenta-eliminar" required>
-          <label for="admin-monto-eliminar">Monto a Eliminar:</label>
-          <input type="number" id="admin-monto-eliminar" name="admin-monto-eliminar" required>
-          <button type="submit">Eliminar Fondos</button>
-        </form>
+        <div class="fondos-content">
+          <div class="gestionar-fondos-panel">
+            <h4>Gestión de Fondos</h4>
+            <form id="form-admin-anadir-fondos">
+              <fieldset class="panel-cedula">
+                <legend>Información de Cédula</legend>
+                <label for="admin-cedula-fondos-add">Cédula del Cliente:</label>
+                <input type="text" id="admin-cedula-fondos-add" name="admin-cedula-fondos-add" required>
+              </fieldset>
+              <label for="admin-cuenta-fondos">Cuenta:</label>
+              <input type="text" id="admin-cuenta-fondos" name="admin-cuenta-fondos" required>
+              <label for="admin-monto-anadir">Monto a Añadir:</label>
+              <input type="number" id="admin-monto-anadir" name="admin-monto-anadir" required>
+              <button type="submit">Añadir Fondos</button>
+            </form>
+            <form id="form-admin-eliminar-fondos">
+              <fieldset class="panel-cedula">
+                <legend>Información de Cédula</legend>
+                <label for="admin-cedula-fondos-del">Cédula del Cliente:</label>
+                <input type="text" id="admin-cedula-fondos-del" name="admin-cedula-fondos-del" required>
+              </fieldset>
+              <label for="admin-cuenta-eliminar">Cuenta:</label>
+              <input type="text" id="admin-cuenta-eliminar" name="admin-cuenta-eliminar" required>
+              <label for="admin-monto-eliminar">Monto a Eliminar:</label>
+              <input type="number" id="admin-monto-eliminar" name="admin-monto-eliminar" required>
+              <button type="submit">Eliminar Fondos</button>
+            </form>
+          </div>
+          <div class="consulta-fondos-panel">
+            <h4>Consulta de Fondos</h4>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Cuenta</th>
+                    <th>Saldo</th>
+                  </tr>
+                </thead>
+                <tbody id="fondos-list">
+                  <!-- Se cargarán los datos de fondos -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
       
       <!-- Sección de Monitoreo y Control de Transacciones -->
       <div id="admin-transacciones" class="content-section">
         <h2>Monitoreo y Control de Transacciones</h2>
+        <form id="form-buscar-transacciones">
+          <label for="busqueda-transacciones">Buscar Usuario:</label>
+          <input type="text" id="busqueda-transacciones" name="busqueda-transacciones" placeholder="Ingrese nombre, cédula o ID" required>
+          <button type="submit">Buscar</button>
+        </form>
         <div class="transactions">
           <div class="table-container">
             <table>
@@ -130,7 +189,7 @@
               </tr>
             </thead>
             <tbody id="clientes-list">
-              <!-- Los resultados se cargarán aquí -->
+              <!-- Se cargarán los resultados -->
             </tbody>
           </table>
         </div>
@@ -148,7 +207,6 @@
               </tr>
             </thead>
             <tbody id="reportes-list">
-              <!-- Ejemplo de reporte -->
               <tr>
                 <td>Total Clientes</td>
                 <td>150</td>

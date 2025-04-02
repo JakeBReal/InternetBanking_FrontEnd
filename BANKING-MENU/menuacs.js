@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const cheques = document.getElementById("cheques");
   const serrucho = document.getElementById("serrucho");
   const deposito = document.getElementById("deposito");
-  const tarjetasAdd = document.getElementById("tarjetas-add");
   const perfil = document.getElementById("perfil");
 
   // Ocultar todas las secciones por defecto excepto Bienvenida
@@ -19,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
   cheques.style.display = "none";
   serrucho.style.display = "none";
   deposito.style.display = "none";
-  if (tarjetasAdd) tarjetasAdd.style.display = "none";
   if (perfil) perfil.style.display = "none";
 
   function ocultarSecciones() {
@@ -31,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
     cheques.style.display = "none";
     serrucho.style.display = "none";
     deposito.style.display = "none";
-    if (tarjetasAdd) tarjetasAdd.style.display = "none";
     if (perfil) perfil.style.display = "none";
   }
 
@@ -402,52 +399,6 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error('Error al realizar el depósito:', error);
         alert('Error al realizar el depósito. Por favor, intente nuevamente.');
       }
-    });
-  }
-
-  // Tarjeta Nueva (Agregar)
-  const tarjetaAgregarBtn = document.querySelector(".tarjeta.agregar");
-  if (tarjetaAgregarBtn) {
-    tarjetaAgregarBtn.addEventListener("click", () => {
-      ocultarSecciones();
-      if (tarjetasAdd) tarjetasAdd.style.display = "block";
-    });
-  }
-
-  const btnSalirTarjeta = document.getElementById("btn-salir-tarjeta");
-  if (btnSalirTarjeta) {
-    btnSalirTarjeta.addEventListener("click", () => {
-      ocultarSecciones();
-      tarjetas.style.display = "block";
-    });
-  }
-
-  const formTarjetas = document.getElementById("form-tarjetas");
-  if (formTarjetas) {
-    formTarjetas.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const tipo = document.getElementById("tipo-tarjeta").value;
-      const numero = document.getElementById("numero-tarjeta").value;
-      const nombre = document.getElementById("nombre-tarjeta").value;
-      const vencimiento = document.getElementById("vencimiento-tarjeta").value;
-      const cvv = document.getElementById("cvv-tarjeta").value;
-      const fecha = new Date().toLocaleDateString();
-      const tarjetasList = document.getElementById("tarjetas-list");
-      if (!tarjetasList) return;
-      const newTarjeta = document.createElement("tr");
-      const ultimos4 = numero.slice(-4);
-      newTarjeta.innerHTML = `
-        <td>${fecha}</td>
-        <td>${tipo}</td>
-        <td>**** **** **** ${ultimos4}</td>
-        <td>${nombre}</td>
-        <td>${vencimiento}</td>
-      `;
-      tarjetasList.appendChild(newTarjeta);
-      alert("Tarjeta añadida con éxito.");
-      formTarjetas.reset();
-      ocultarSecciones();
-      tarjetas.style.display = "block";
     });
   }
 

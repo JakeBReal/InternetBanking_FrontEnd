@@ -1,13 +1,12 @@
-
-
-/* Cuerpo */
+/* =======================
+   ESTILOS GENERALES
+========================= */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #F4F6F9;
 }
 
-/* Contenedor principal (sidebar y contenido) */
 .container {
   display: flex;
   flex-direction: row;
@@ -15,6 +14,9 @@ body {
   min-height: 100vh;
 }
 
+/* =======================
+   BARRA LATERAL (SIDEBAR)
+========================= */
 .sidebar {
   width: 250px;
   background-color: #1E56A0;
@@ -81,7 +83,6 @@ body {
   padding: 20px;
 }
 
-/* Todas las secciones comparten un estilo base y se ocultan por defecto */
 .content-section {
   display: none;
   margin-top: 20px;
@@ -97,12 +98,11 @@ body {
 ========================= */
 form {
   width: 100%;
-  max-width: 500px;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  margin: 0 auto;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -136,6 +136,146 @@ form button {
 
 form button:hover {
   background-color: #E63946;
+}
+
+/* =======================
+   PANELES DE CÉDULA
+========================= */
+.panel-cedula {
+  border: 2px solid #1E56A0; 
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 8px;
+  background-color: #e9f1fb;
+  box-shadow: 0 2px 4px rgba(30,86,160,0.2);
+}
+
+.panel-cedula legend {
+  font-size: 16px;
+  font-weight: bold;
+  color: #1E56A0;
+  padding: 0 10px;
+}
+
+/* =======================
+   SECCIÓN: TARJETAS (Crear Tarjeta + Consulta de Usuarios)
+========================= */
+.tarjetas-content {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.crear-tarjeta-panel,
+.consulta-usuarios-panel {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  flex: 1;
+  min-width: 320px;
+  text-align: left;
+}
+
+.crear-tarjeta-panel h4,
+.consulta-usuarios-panel h4 {
+  margin-top: 0;
+}
+
+.crear-tarjeta-panel form {
+  max-width: none;
+  margin-bottom: 20px;
+}
+
+/* Ajustes para la tabla de consulta de usuarios */
+.consulta-usuarios-panel .table-container {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.consulta-usuarios-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+.consulta-usuarios-panel th,
+.consulta-usuarios-panel td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.consulta-usuarios-panel th {
+  background: #1E56A0;
+  color: white;
+  text-align: left;
+  font-weight: 600;
+}
+
+.consulta-usuarios-panel tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* =======================
+   SECCIÓN: FONDOS (Gestión + Consulta)
+========================= */
+.fondos-content {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.gestionar-fondos-panel,
+.consulta-fondos-panel {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  flex: 1;
+  min-width: 320px;
+  text-align: left;
+}
+
+.gestionar-fondos-panel h4,
+.consulta-fondos-panel h4 {
+  margin-top: 0;
+}
+
+/* Ajustes para la tabla de consulta de fondos */
+.consulta-fondos-panel .table-container {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.consulta-fondos-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+.consulta-fondos-panel th,
+.consulta-fondos-panel td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.consulta-fondos-panel th {
+  background: #1E56A0;
+  color: white;
+  text-align: left;
+  font-weight: 600;
+}
+
+.consulta-fondos-panel tr:hover {
+  background-color: #f8f9fa;
 }
 
 /* =======================
@@ -262,6 +402,9 @@ form button:hover {
   background-color: #f8f9fa;
 }
 
+/* =======================
+   RESPONSIVE DESIGN
+========================= */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -273,5 +416,8 @@ form button:hover {
   }
   .main-content {
     padding: 10px;
+  }
+  .tarjetas-content, .fondos-content {
+    flex-direction: column;
   }
 }
