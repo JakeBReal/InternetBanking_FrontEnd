@@ -21,7 +21,6 @@
         <li><a href="#" id="cheques-btn">📄 Cheques</a></li>
         <li><a href="#" id="serrucho-btn">👤👤 Serrucho</a></li>
         <li><a href="#" id="deposito-btn">🏦 Depósito</a></li>
-        <li><a href="#" id="admin-btn">🛠️ Admin</a></li>
         <li><a href="#" id="perfil-btn">👤 Perfil</a></li>
         <li class="logout"><a href="#">🚪 Cerrar sesión</a></li>
       </ul>
@@ -102,50 +101,21 @@
       <div id="tarjetas" class="content-section">
         <h2>Tarjetas</h2>
         <div class="tarjetas">
-          <!-- Aquí pueden ir las tarjetas existentes -->
-        </div>
-        <!-- Tarjeta para agregar nueva tarjeta -->
-        <div class="tarjeta agregar">
-          <span>+</span>
-          <p>Añadir nueva tarjeta</p>
-        </div>
-      </div>
-
-      <!-- Sección de Añadir Tarjeta -->
-      <div id="tarjetas-add" class="content-section">
-        <h2>Añadir Tarjeta</h2>
-        <form id="form-tarjetas">
-          <label for="tipo-tarjeta">Tipo de Tarjeta:</label>
-          <select id="tipo-tarjeta" name="tipo-tarjeta" required>
-            <option value="">Seleccione</option>
-            <option value="Débito">Débito</option>
-            <option value="Crédito">Crédito</option>
-          </select>
-          <label for="numero-tarjeta">Número de Tarjeta:</label>
-          <input type="text" id="numero-tarjeta" name="numero-tarjeta" required>
-          <label for="nombre-tarjeta">Nombre en la Tarjeta:</label>
-          <input type="text" id="nombre-tarjeta" name="nombre-tarjeta" required>
-          <label for="vencimiento-tarjeta">Fecha de Vencimiento (MM/AA):</label>
-          <input type="text" id="vencimiento-tarjeta" name="vencimiento-tarjeta" placeholder="MM/AA" required>
-          <label for="cvv-tarjeta">CVV:</label>
-          <input type="number" id="cvv-tarjeta" name="cvv-tarjeta" required>
-          <button type="submit">Guardar Tarjeta</button>
-          <button type="button" id="btn-salir-tarjeta">Salir</button>
-        </form>
-        <div class="transactions">
-          <h3>Historial de Tarjetas</h3>
-          <div class="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Tipo</th>
-                  <th>Número</th>
-                  <th>Nombre</th>
-                  <th>Vencimiento</th>
-                </tr>
-              </thead>
-              <tbody id="tarjetas-list"></tbody>
-            </table>
+          <div class="tarjeta">
+            <div class="detalles">
+              <span class="tipo">Débito</span>
+              <span class="banco">VISA</span>
+              <p>Juan Pérez</p>
+              <p>**** 1234</p>
+            </div>
+          </div>
+          <div class="tarjeta">
+            <div class="detalles">
+              <span class="tipo">Crédito</span>
+              <span class="banco">VISA</span>
+              <p>Juan Pérez</p>
+              <p>**** 5678</p>
+            </div>
           </div>
         </div>
       </div>
@@ -298,84 +268,6 @@
             <p><strong>Correo:</strong> <span id="profile-email"></span></p>
             <p><strong>Teléfono:</strong> <span id="profile-phone"></span></p>
             <p><strong>Dirección:</strong> <span id="profile-address"></span></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sección de Admin -->
-      <div id="admin" class="content-section">
-        <h2>Panel de Administración</h2>
-        <div class="admin-menu">
-          <button id="admin-btn-tarjetas">💳 Tarjetas</button>
-          <button id="admin-btn-fondos">💰 Fondos</button>
-          <button id="admin-btn-usuarios">👥 Usuarios</button>
-        </div>
-        <div id="admin-content">
-          <!-- Sección de Tarjetas en Admin -->
-          <div id="admin-tarjetas-section" class="admin-section" style="display: none;">
-            <h3>Mantenimiento de Tarjetas</h3>
-            <form id="form-admin-crear-tarjeta">
-              <h4>Crear Tarjeta</h4>
-              <label for="admin-tipo-tarjeta">Tipo de Tarjeta:</label>
-              <select id="admin-tipo-tarjeta" name="admin-tipo-tarjeta" required>
-                <option value="">Seleccione</option>
-                <option value="Débito">Débito</option>
-                <option value="Crédito">Crédito</option>
-              </select>
-              <label for="admin-banco-tarjeta">Banco:</label>
-              <input type="text" id="admin-banco-tarjeta" name="admin-banco-tarjeta" required>
-              <label for="admin-nombre-titular">Nombre del Titular:</label>
-              <input type="text" id="admin-nombre-titular" name="admin-nombre-titular" required>
-              <label for="admin-numero-tarjeta">Número de Tarjeta:</label>
-              <input type="text" id="admin-numero-tarjeta" name="admin-numero-tarjeta" required>
-              <label for="admin-tarjeta-expiracion">Fecha de Vencimiento (MM/AA):</label>
-              <input type="text" id="admin-tarjeta-expiracion" name="admin-tarjeta-expiracion" placeholder="MM/AA" required>
-              <label for="admin-tarjeta-cvv">CVV:</label>
-              <input type="number" id="admin-tarjeta-cvv" name="admin-tarjeta-cvv" required>
-              <button type="submit">Crear Tarjeta</button>
-            </form>
-            <form id="form-admin-eliminar-tarjeta">
-              <h4>Eliminar Tarjeta</h4>
-              <label for="admin-numero-tarjeta-eliminar">Número de Tarjeta:</label>
-              <input type="text" id="admin-numero-tarjeta-eliminar" name="admin-numero-tarjeta-eliminar" required>
-              <button type="submit">Eliminar Tarjeta</button>
-            </form>
-          </div>
-          <!-- Sección de Fondos en Admin -->
-          <div id="admin-fondos-section" class="admin-section" style="display: none;">
-            <h3>Mantenimiento de Fondos</h3>
-            <form id="form-admin-anadir-fondos">
-              <h4>Añadir Fondos</h4>
-              <label for="admin-cuenta-fondos">Cuenta:</label>
-              <input type="text" id="admin-cuenta-fondos" name="admin-cuenta-fondos" required>
-              <label for="admin-monto-anadir">Monto a Añadir:</label>
-              <input type="number" id="admin-monto-anadir" name="admin-monto-anadir" required>
-              <button type="submit">Añadir Fondos</button>
-            </form>
-            <form id="form-admin-eliminar-fondos">
-              <h4>Eliminar Fondos</h4>
-              <label for="admin-cuenta-eliminar">Cuenta:</label>
-              <input type="text" id="admin-cuenta-eliminar" name="admin-cuenta-eliminar" required>
-              <label for="admin-monto-eliminar">Monto a Eliminar:</label>
-              <input type="number" id="admin-monto-eliminar" name="admin-monto-eliminar" required>
-              <button type="submit">Eliminar Fondos</button>
-            </form>
-          </div>
-          <!-- Sección de Usuarios en Admin -->
-          <div id="admin-usuarios-section" class="admin-section" style="display: none;">
-            <h3>Mantenimiento de Usuarios</h3>
-            <form id="form-admin-usuarios">
-              <h4>Eliminar Usuario</h4>
-              <label for="admin-usuario-id">ID del Usuario:</label>
-              <input type="text" id="admin-usuario-id" name="admin-usuario-id" required>
-              <button type="submit" name="action" value="eliminar">Eliminar Usuario</button>
-              <h4>Actualizar Usuario</h4>
-              <label for="admin-usuario-id-upd">ID del Usuario:</label>
-              <input type="text" id="admin-usuario-id-upd" name="admin-usuario-id-upd" required>
-              <label for="admin-usuario-nuevo">Nuevo Nombre:</label>
-              <input type="text" id="admin-usuario-nuevo" name="admin-usuario-nuevo" required>
-              <button type="submit" name="action" value="actualizar">Actualizar Usuario</button>
-            </form>
           </div>
         </div>
       </div>
