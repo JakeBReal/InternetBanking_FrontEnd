@@ -139,22 +139,21 @@ form button:hover {
 }
 
 /* =======================
-   PANELES DE CÉDULA
+   PANELES DE CÉDULA (se muestran igual que los otros campos)
 ========================= */
 .panel-cedula {
-  border: 2px solid #1E56A0; 
-  padding: 15px;
-  margin: 15px 0;
-  border-radius: 8px;
-  background-color: #e9f1fb;
-  box-shadow: 0 2px 4px rgba(30,86,160,0.2);
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  background-color: #fff;
 }
 
 .panel-cedula legend {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
-  color: #1E56A0;
-  padding: 0 10px;
+  color: #333;
+  padding: 0 5px;
 }
 
 /* =======================
@@ -189,7 +188,7 @@ form button:hover {
   margin-bottom: 20px;
 }
 
-/* Ajustes para la tabla de consulta de usuarios */
+/* Tabla de consulta de usuarios */
 .consulta-usuarios-panel .table-container {
   margin-top: 20px;
   overflow-x: auto;
@@ -221,7 +220,19 @@ form button:hover {
 }
 
 /* =======================
-   SECCIÓN: FONDOS (Gestión + Consulta)
+   SECCIÓN: ELIMINAR TARJETA
+========================= */
+#admin-eliminar-tarjeta {
+  margin-top: 20px;
+  text-align: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* =======================
+   SECCIÓN: FONDOS (Gestión)
 ========================= */
 .fondos-content {
   display: flex;
@@ -247,7 +258,7 @@ form button:hover {
   margin-top: 0;
 }
 
-/* Ajustes para la tabla de consulta de fondos */
+/* Tabla de consulta de fondos para gestión */
 .consulta-fondos-panel .table-container {
   margin-top: 20px;
   overflow-x: auto;
@@ -276,6 +287,18 @@ form button:hover {
 
 .consulta-fondos-panel tr:hover {
   background-color: #f8f9fa;
+}
+
+/* =======================
+   SECCIÓN: ELIMINAR FONDOS
+========================= */
+#admin-eliminar-fondos {
+  margin-top: 20px;
+  text-align: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 /* =======================

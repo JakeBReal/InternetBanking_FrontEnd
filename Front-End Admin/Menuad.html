@@ -11,8 +11,10 @@
     <div class="sidebar">
       <img src="bank-logo-or-icon-design-on-white-background-illustration-vector-removebg-preview.png" alt="Logo" style="width: 120px; height: auto;">
       <ul>
-        <li><a href="#" id="admin-tarjetas-btn">💳 Tarjetas</a></li>
-        <li><a href="#" id="admin-fondos-btn">💰 Fondos</a></li>
+        <li><a href="#" id="admin-tarjetas-btn">💳 Crear Tarjeta</a></li>
+        <li><a href="#" id="admin-eliminar-tarjeta-btn">🗑️ Eliminar Tarjeta</a></li>
+        <li><a href="#" id="admin-fondos-btn">💰 Gestión de Fondos</a></li>
+        <li><a href="#" id="admin-eliminar-fondos-btn">🗑️ Eliminar Fondos</a></li>
         <li><a href="#" id="admin-transacciones-btn">📊 Monitoreo y Control</a></li>
         <li><a href="#" id="admin-clientes-btn">👥 Gestión de Clientes</a></li>
         <li><a href="#" id="admin-reportes-btn">📈 Reporte y Estadísticas</a></li>
@@ -20,11 +22,11 @@
       </ul>
     </div>
     <div class="main-content">
-      <!-- Sección de Tarjetas -->
+      <!-- Sección de Tarjetas: Crear Tarjeta y Consulta de Usuarios -->
       <div id="admin-tarjetas" class="content-section">
         <h2>Mantenimiento de Tarjetas</h2>
         <div class="tarjetas-content">
-          <!-- Panel de creación/eliminación de tarjeta -->
+          <!-- Panel de creación de tarjeta -->
           <div class="crear-tarjeta-panel">
             <h4>Crear Tarjeta</h4>
             <form id="form-admin-crear-tarjeta">
@@ -38,11 +40,10 @@
               <input type="text" id="admin-banco-tarjeta" name="admin-banco-tarjeta" required>
               <label for="admin-nombre-titular">Nombre del Titular:</label>
               <input type="text" id="admin-nombre-titular" name="admin-nombre-titular" required>
-              <fieldset class="panel-cedula">
-                <legend>Información de Cédula</legend>
-                <label for="admin-cedula">Cédula:</label>
-                <input type="text" id="admin-cedula" name="admin-cedula" required>
-              </fieldset>
+              <label for="admin-apellido-titular">Apellido del Titular:</label>
+              <input type="text" id="admin-apellido-titular" name="admin-apellido-titular" required>
+              <label for="admin-cedula">Cédula:</label>
+              <input type="text" id="admin-cedula" name="admin-cedula" required>
               <label for="admin-numero-tarjeta">Número de Tarjeta:</label>
               <input type="text" id="admin-numero-tarjeta" name="admin-numero-tarjeta" required>
               <label for="admin-tarjeta-expiracion">Fecha de Vencimiento (MM/AA):</label>
@@ -50,12 +51,6 @@
               <label for="admin-tarjeta-cvv">CVV:</label>
               <input type="number" id="admin-tarjeta-cvv" name="admin-tarjeta-cvv" required>
               <button type="submit">Crear Tarjeta</button>
-            </form>
-            <h4>Eliminar Tarjeta</h4>
-            <form id="form-admin-eliminar-tarjeta">
-              <label for="admin-numero-tarjeta-eliminar">Número de Tarjeta:</label>
-              <input type="text" id="admin-numero-tarjeta-eliminar" name="admin-numero-tarjeta-eliminar" required>
-              <button type="submit">Eliminar Tarjeta</button>
             </form>
           </div>
           <!-- Panel de consulta de usuarios -->
@@ -67,10 +62,11 @@
                   <tr>
                     <th>Nombre</th>
                     <th>Apellido</th>
+                    <th>Cédula</th>
                   </tr>
                 </thead>
                 <tbody id="usuarios-list">
-                  <!-- Se cargarán los datos de usuarios -->
+                  <!-- Datos de usuarios se cargarán aquí -->
                 </tbody>
               </table>
             </div>
@@ -78,35 +74,54 @@
         </div>
       </div>
       
-      <!-- Sección de Fondos -->
+      <!-- Sección de Eliminar Tarjeta -->
+      <div id="admin-eliminar-tarjeta" class="content-section">
+        <h2>Eliminar Tarjeta</h2>
+        <div class="tarjetas-content">
+          <!-- Panel de consulta de tarjetas -->
+          <div class="consulta-usuarios-panel">
+            <h4>Consulta de Tarjetas</h4>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Número</th>
+                    <th>Banco</th>
+                    <th>Titular</th>
+                  </tr>
+                </thead>
+                <tbody id="tarjetas-eliminar-list">
+                  <!-- Datos de tarjetas se cargarán aquí -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Panel de mantenimiento (eliminación) -->
+          <div class="crear-tarjeta-panel">
+            <h4>Mantenimiento de Eliminación</h4>
+            <form id="form-admin-eliminar-tarjeta">
+              <label for="admin-numero-tarjeta-eliminar">Número de Tarjeta:</label>
+              <input type="text" id="admin-numero-tarjeta-eliminar" name="admin-numero-tarjeta-eliminar" required>
+              <button type="submit">Eliminar Tarjeta</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sección de Fondos: Gestión -->
       <div id="admin-fondos" class="content-section">
-        <h2>Mantenimiento de Fondos</h2>
+        <h2>Gestión de Fondos</h2>
         <div class="fondos-content">
           <div class="gestionar-fondos-panel">
-            <h4>Gestión de Fondos</h4>
+            <h4>Añadir Fondos</h4>
             <form id="form-admin-anadir-fondos">
-              <fieldset class="panel-cedula">
-                <legend>Información de Cédula</legend>
-                <label for="admin-cedula-fondos-add">Cédula del Cliente:</label>
-                <input type="text" id="admin-cedula-fondos-add" name="admin-cedula-fondos-add" required>
-              </fieldset>
+              <label for="admin-cedula-fondos-add">Cédula del Cliente:</label>
+              <input type="text" id="admin-cedula-fondos-add" name="admin-cedula-fondos-add" required>
               <label for="admin-cuenta-fondos">Cuenta:</label>
               <input type="text" id="admin-cuenta-fondos" name="admin-cuenta-fondos" required>
               <label for="admin-monto-anadir">Monto a Añadir:</label>
               <input type="number" id="admin-monto-anadir" name="admin-monto-anadir" required>
               <button type="submit">Añadir Fondos</button>
-            </form>
-            <form id="form-admin-eliminar-fondos">
-              <fieldset class="panel-cedula">
-                <legend>Información de Cédula</legend>
-                <label for="admin-cedula-fondos-del">Cédula del Cliente:</label>
-                <input type="text" id="admin-cedula-fondos-del" name="admin-cedula-fondos-del" required>
-              </fieldset>
-              <label for="admin-cuenta-eliminar">Cuenta:</label>
-              <input type="text" id="admin-cuenta-eliminar" name="admin-cuenta-eliminar" required>
-              <label for="admin-monto-eliminar">Monto a Eliminar:</label>
-              <input type="number" id="admin-monto-eliminar" name="admin-monto-eliminar" required>
-              <button type="submit">Eliminar Fondos</button>
             </form>
           </div>
           <div class="consulta-fondos-panel">
@@ -120,10 +135,45 @@
                   </tr>
                 </thead>
                 <tbody id="fondos-list">
-                  <!-- Se cargarán los datos de fondos -->
+                  <!-- Datos de fondos se cargarán aquí -->
                 </tbody>
               </table>
             </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sección de Eliminar Fondos -->
+      <div id="admin-eliminar-fondos" class="content-section">
+        <h2>Eliminar Fondos</h2>
+        <div class="fondos-content">
+          <!-- Panel de consulta de fondos -->
+          <div class="consulta-fondos-panel">
+            <h4>Consulta de Fondos</h4>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Cuenta</th>
+                    <th>Saldo</th>
+                  </tr>
+                </thead>
+                <tbody id="fondos-eliminar-list">
+                  <!-- Datos de fondos para eliminación se cargarán aquí -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Panel de mantenimiento (eliminación) -->
+          <div class="gestionar-fondos-panel">
+            <h4>Mantenimiento de Eliminación</h4>
+            <form id="form-admin-eliminar-fondos">
+              <label for="admin-cuenta-eliminar">Cuenta:</label>
+              <input type="text" id="admin-cuenta-eliminar" name="admin-cuenta-eliminar" required>
+              <label for="admin-monto-eliminar">Monto a Eliminar:</label>
+              <input type="number" id="admin-monto-eliminar" name="admin-monto-eliminar" required>
+              <button type="submit">Eliminar Fondos</button>
+            </form>
           </div>
         </div>
       </div>
@@ -189,7 +239,7 @@
               </tr>
             </thead>
             <tbody id="clientes-list">
-              <!-- Se cargarán los resultados -->
+              <!-- Resultados se cargarán aquí -->
             </tbody>
           </table>
         </div>
