@@ -181,6 +181,46 @@ document.addEventListener("DOMContentLoaded", function () {
     actualizarSaldos();
   });
 
+  async function cargarTransacciones() {
+    try {
+        // Obtener el ID del usuario desde localStorage
+        const userId = localStorage.getItem('id');
+        
+        if (!userId) {
+            console.error('ID de usuario no encontrado en localStorage');
+            return;
+        }
+        
+        // Incluir el ID como parámetro en la URL
+        const response = await fetch(`http://localhost:3000/api/transacciones/${userId}`);
+        const transacciones = await response.json();
+          console.log(transacciones);
+          
+        const transactionsList = document.getElementById("transactions-list");
+        // Limpiar la tabla antes de agregar nuevas transacciones
+        transactionsList.innerHTML = '';
+        
+        // Ordenar las transacciones por fecha (más recientes primero)
+        transacciones.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+
+        transacciones.forEach(transaccion => {
+            const fecha = new Date(transaccion.fecha).toLocaleDateString();
+            const newTransfer = document.createElement("tr");
+            newTransfer.innerHTML = `
+                <td>${fecha}</td>
+                <td>${transaccion.cuenta_origen}</td>
+                <td>${transaccion.cuenta_destino}</td>
+                <td>$${transaccion.monto}</td>
+                <td>${transaccion.concepto}</td>
+            `;
+            transactionsList.appendChild(newTransfer);
+        });
+    } catch (error) {
+        console.error('Error al cargar las transacciones:', error);
+    }
+}
+
+
   document.getElementById("transacciones-btn").addEventListener("click", () => {
     ocultarSecciones();
     transferencias.style.display = "block";
@@ -232,6 +272,14 @@ document.addEventListener("DOMContentLoaded", function () {
   if (formTransferencias) {
     formTransferencias.addEventListener("submit", async function(e) {
       e.preventDefault();
+      
+      const submitButton = document.querySelector("#form-transacciones button[type='submit']");
+      const originalButtonText = submitButton.textContent;
+      
+      // Deshabilitar el botón y mostrar loading
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<span class="loading-spinner"></span> Procesando transferencia...';
+
       const origen = document.getElementById("origen").value;
       const destino = document.getElementById("destino").value;
       const monto = document.getElementById("monto").value;
@@ -266,6 +314,10 @@ document.addEventListener("DOMContentLoaded", function () {
       } catch (error) {
         console.error('Error al realizar la transacción:', error);
         alert('Error al realizar la transacción. Por favor, intente nuevamente.');
+      } finally {
+        // Restaurar el botón a su estado original
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
       }
     });
   }
@@ -359,6 +411,14 @@ document.addEventListener("DOMContentLoaded", function () {
   if (formDeposito) {
     formDeposito.addEventListener("submit", async function(e) {
       e.preventDefault();
+      
+      const submitButton = document.querySelector("#form-deposito button[type='submit']");
+      const originalButtonText = submitButton.textContent;
+      
+      // Deshabilitar el botón y mostrar loading
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<span class="loading-spinner"></span> Procesando depósito...';
+
       const cuentaDeposito = document.getElementById("cuenta-deposito").value;
       const montoDeposito = document.getElementById("monto-deposito").value;
       const referenciaDeposito = document.getElementById("referencia-deposito").value;
@@ -398,6 +458,10 @@ document.addEventListener("DOMContentLoaded", function () {
       } catch (error) {
         console.error('Error al realizar el depósito:', error);
         alert('Error al realizar el depósito. Por favor, intente nuevamente.');
+      } finally {
+        // Restaurar el botón a su estado original
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
       }
     });
   }
@@ -408,6 +472,75 @@ document.addEventListener("DOMContentLoaded", function () {
     if (confirm('¿Está seguro que desea cerrar sesión?')) {
       localStorage.removeItem('id');
       window.location.href = '../Login-Register/index.html';
+    }
+  });
+
+  // Evento para el formulario de impuestos
+  document.getElementById("form-impuestos").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const submitButton = document.querySelector("#form-impuestos button[type='submit']");
+    const originalButtonText = submitButton.textContent;
+    
+    // Deshabilitar el botón y mostrar loading
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<span class="loading-spinner"></span> Procesando pago...';
+
+    const tipoImpuesto = document.getElementById("tipo-impuesto").value;
+    const numeroReferencia = document.getElementById("numero-referencia").value;
+    const montoImpuesto = document.getElementById("monto-impuesto").value;
+    const cuentaPago = document.getElementById("cuenta-pago").value;
+
+    try {
+      // Obtener el ID del usuario desde localStorage
+      const userId = localStorage.getItem('id');
+      
+      if (!userId) {
+        console.error('ID de usuario no encontrado en localStorage');
+        alert('Error: No se pudo identificar al usuario');
+        return;
+      }
+
+      const response = await fetch(`http://localhost:3000/api/servicios/${userId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          tipo_de_impuesto: tipoImpuesto,
+          numero_referencia: numeroReferencia,
+          monto: parseFloat(montoImpuesto),
+          cuenta_pago: cuentaPago
+        })
+      });
+
+      if (response.ok) {
+        alert('Pago de servicio realizado con éxito');
+        
+        // Mostrar la pantalla de estado y actualizar saldos
+        ocultarSecciones();
+        inicio.style.display = "block";
+        await actualizarSaldos();
+        
+        // Esperar un momento y volver a la sección de impuestos con datos actualizados
+        setTimeout(() => {
+          ocultarSecciones();
+          impuestos.style.display = "block";
+          cargarHistorialServicios();
+        }, 1500);
+        
+        document.getElementById("form-impuestos").reset();
+      } else {
+        const errorData = await response.json();
+        alert('Error en el pago: ' + (errorData.message || 'Error desconocido'));
+      }
+    } catch (error) {
+      console.error('Error al realizar el pago:', error);
+      alert('Error al realizar el pago. Por favor, intente nuevamente.');
+    } finally {
+      // Restaurar el botón a su estado original
+      submitButton.disabled = false;
+      submitButton.textContent = originalButtonText;
     }
   });
 });
