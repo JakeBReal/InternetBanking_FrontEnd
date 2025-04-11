@@ -1,4 +1,13 @@
 // alert("Hello world!");
+
+// Variables globales
+const contenedor_login_register = document.querySelector(".contenedor__login_register");
+const formulario_login = document.querySelector(".formulario_login");
+const formulario_registro = document.querySelector(".formulario_registro");
+const caja_trasera_login = document.querySelector(".caja_trasera_login");
+const caja_trasera_register = document.querySelector(".caja_trasera_register");
+
+// Event Listeners iniciales
 document.addEventListener('DOMContentLoaded', () => {
     // Botones de navegación
     document.getElementById("btn-registarse").addEventListener("click", register);
@@ -203,11 +212,3 @@ formImpuestos.addEventListener("submit", async function (e) {
         alert('Error al realizar el pago. Por favor, intente nuevamente.');
     }
 });
-
-// DECLARANDO VARIABLE
-const contenedor_login_register = document.querySelector(".contenedor__login_register");
-const formulario_login = document.querySelector(".formulario_login");
-const formulario_registro = document.querySelector(".formulario_registro");
-const caja_trasera_login = document.querySelector(".caja_trasera_login");
-const caja_trasera_register = document.querySelector(".caja_trasera_register");
-
